@@ -1,0 +1,174 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    E
+    F
+    T
+
+Grammar
+
+Rule 0     S' -> EE
+Rule 1     EE -> EE ADDITION TT
+Rule 2     EE -> TT
+Rule 3     TT -> TT PRODUCT FF
+Rule 4     TT -> FF
+Rule 5     FF -> NUMBER
+Rule 6     FF -> PAREN EE PAREN
+
+Terminals, with rules where they appear
+
+ADDITION             : 1
+E                    : 
+F                    : 
+NUMBER               : 5
+PAREN                : 6 6
+PRODUCT              : 3
+T                    : 
+error                : 
+
+Nonterminals, with rules where they appear
+
+EE                   : 1 6 0
+FF                   : 3 4
+TT                   : 1 2 3
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . EE
+    (1) EE -> . EE ADDITION TT
+    (2) EE -> . TT
+    (3) TT -> . TT PRODUCT FF
+    (4) TT -> . FF
+    (5) FF -> . NUMBER
+    (6) FF -> . PAREN EE PAREN
+
+    NUMBER          shift and go to state 4
+    PAREN           shift and go to state 5
+
+    EE                             shift and go to state 1
+    TT                             shift and go to state 2
+    FF                             shift and go to state 3
+
+state 1
+
+    (0) S' -> EE .
+    (1) EE -> EE . ADDITION TT
+
+    ADDITION        shift and go to state 6
+
+
+state 2
+
+    (2) EE -> TT .
+    (3) TT -> TT . PRODUCT FF
+
+    ADDITION        reduce using rule 2 (EE -> TT .)
+    $end            reduce using rule 2 (EE -> TT .)
+    PAREN           reduce using rule 2 (EE -> TT .)
+    PRODUCT         shift and go to state 7
+
+
+state 3
+
+    (4) TT -> FF .
+
+    PRODUCT         reduce using rule 4 (TT -> FF .)
+    ADDITION        reduce using rule 4 (TT -> FF .)
+    $end            reduce using rule 4 (TT -> FF .)
+    PAREN           reduce using rule 4 (TT -> FF .)
+
+
+state 4
+
+    (5) FF -> NUMBER .
+
+    PRODUCT         reduce using rule 5 (FF -> NUMBER .)
+    ADDITION        reduce using rule 5 (FF -> NUMBER .)
+    $end            reduce using rule 5 (FF -> NUMBER .)
+    PAREN           reduce using rule 5 (FF -> NUMBER .)
+
+
+state 5
+
+    (6) FF -> PAREN . EE PAREN
+    (1) EE -> . EE ADDITION TT
+    (2) EE -> . TT
+    (3) TT -> . TT PRODUCT FF
+    (4) TT -> . FF
+    (5) FF -> . NUMBER
+    (6) FF -> . PAREN EE PAREN
+
+    NUMBER          shift and go to state 4
+    PAREN           shift and go to state 5
+
+    EE                             shift and go to state 8
+    TT                             shift and go to state 2
+    FF                             shift and go to state 3
+
+state 6
+
+    (1) EE -> EE ADDITION . TT
+    (3) TT -> . TT PRODUCT FF
+    (4) TT -> . FF
+    (5) FF -> . NUMBER
+    (6) FF -> . PAREN EE PAREN
+
+    NUMBER          shift and go to state 4
+    PAREN           shift and go to state 5
+
+    TT                             shift and go to state 9
+    FF                             shift and go to state 3
+
+state 7
+
+    (3) TT -> TT PRODUCT . FF
+    (5) FF -> . NUMBER
+    (6) FF -> . PAREN EE PAREN
+
+    NUMBER          shift and go to state 4
+    PAREN           shift and go to state 5
+
+    FF                             shift and go to state 10
+
+state 8
+
+    (6) FF -> PAREN EE . PAREN
+    (1) EE -> EE . ADDITION TT
+
+    PAREN           shift and go to state 11
+    ADDITION        shift and go to state 6
+
+
+state 9
+
+    (1) EE -> EE ADDITION TT .
+    (3) TT -> TT . PRODUCT FF
+
+    ADDITION        reduce using rule 1 (EE -> EE ADDITION TT .)
+    $end            reduce using rule 1 (EE -> EE ADDITION TT .)
+    PAREN           reduce using rule 1 (EE -> EE ADDITION TT .)
+    PRODUCT         shift and go to state 7
+
+
+state 10
+
+    (3) TT -> TT PRODUCT FF .
+
+    PRODUCT         reduce using rule 3 (TT -> TT PRODUCT FF .)
+    ADDITION        reduce using rule 3 (TT -> TT PRODUCT FF .)
+    $end            reduce using rule 3 (TT -> TT PRODUCT FF .)
+    PAREN           reduce using rule 3 (TT -> TT PRODUCT FF .)
+
+
+state 11
+
+    (6) FF -> PAREN EE PAREN .
+
+    PRODUCT         reduce using rule 6 (FF -> PAREN EE PAREN .)
+    ADDITION        reduce using rule 6 (FF -> PAREN EE PAREN .)
+    $end            reduce using rule 6 (FF -> PAREN EE PAREN .)
+    PAREN           reduce using rule 6 (FF -> PAREN EE PAREN .)
+
