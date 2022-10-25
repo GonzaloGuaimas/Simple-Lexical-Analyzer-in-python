@@ -6,9 +6,9 @@ _tabversion = '3.10'
 
 _lr_method = 'LALR'
 
-_lr_signature = 'ADDITION E F NUMBER PAREN PRODUCT TEE : EE ADDITION TT\n        | TTTT : TT PRODUCT FF\n        | FFFF : NUMBER\n        | PAREN EE PAREN'
+_lr_signature = 'CONST IDENT PAREN PROC VARS : PROC IDENT PAREN P PARENP : VAR P\n        | CONST P \n        | emptyempty : '
     
-_lr_action_items = {'NUMBER':([0,5,6,7,],[4,4,4,4,]),'PAREN':([0,2,3,4,5,6,7,8,9,10,11,],[5,-2,-4,-5,5,5,5,11,-1,-3,-6,]),'$end':([1,2,3,4,9,10,11,],[0,-2,-4,-5,-1,-3,-6,]),'ADDITION':([1,2,3,4,8,9,10,11,],[6,-2,-4,-5,6,-1,-3,-6,]),'PRODUCT':([2,3,4,9,10,11,],[7,-4,-5,7,-3,-6,]),}
+_lr_action_items = {'PROC':([0,],[2,]),'$end':([1,9,],[0,-1,]),'IDENT':([2,],[3,]),'PAREN':([3,4,5,6,7,8,10,11,],[4,-5,9,-5,-5,-4,-2,-3,]),'VAR':([4,6,7,],[6,6,6,]),'CONST':([4,6,7,],[7,7,7,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -17,7 +17,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'EE':([0,5,],[1,8,]),'TT':([0,5,6,],[2,2,9,]),'FF':([0,5,6,7,],[3,3,3,10,]),}
+_lr_goto_items = {'S':([0,],[1,]),'P':([4,6,7,],[5,10,11,]),'empty':([4,6,7,],[8,8,8,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -26,11 +26,10 @@ for _k, _v in _lr_goto_items.items():
        _lr_goto[_x][_k] = _y
 del _lr_goto_items
 _lr_productions = [
-  ("S' -> EE","S'",1,None,None,None),
-  ('EE -> EE ADDITION TT','EE',3,'p_EE','ejercicio1TP7.py',26),
-  ('EE -> TT','EE',1,'p_EE','ejercicio1TP7.py',27),
-  ('TT -> TT PRODUCT FF','TT',3,'p_TT','ejercicio1TP7.py',30),
-  ('TT -> FF','TT',1,'p_TT','ejercicio1TP7.py',31),
-  ('FF -> NUMBER','FF',1,'p_FF','ejercicio1TP7.py',34),
-  ('FF -> PAREN EE PAREN','FF',3,'p_FF','ejercicio1TP7.py',35),
+  ("S' -> S","S'",1,None,None,None),
+  ('S -> PROC IDENT PAREN P PAREN','S',5,'p_S','ejercicio2TP7.py',24),
+  ('P -> VAR P','P',2,'p_P','ejercicio2TP7.py',27),
+  ('P -> CONST P','P',2,'p_P','ejercicio2TP7.py',28),
+  ('P -> empty','P',1,'p_P','ejercicio2TP7.py',29),
+  ('empty -> <empty>','empty',0,'p_empty','ejercicio2TP7.py',32),
 ]
