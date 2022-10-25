@@ -2,7 +2,7 @@ import ply.lex as lex
 
 filename = 'example_text.txt'
 tokens = ['TEXT','TAG_HTML','TAG_HEAD','TAG_TITLE','TAG_BODY','TAG_P','TAG_B','TAG_HR']
-t_TEXT = r'[a-zA-Z]+'
+t_TEXT = r'[a-zA-Z0-9]+'
 t_TAG_HTML = r'(<HTML>)'
 t_TAG_HEAD = r'(<HEAD>|</HEAD>)'
 t_TAG_TITLE = r'(<TITLE>|</TITLE>)'
