@@ -3,35 +3,47 @@ Created by PLY version 3.11 (http://www.dabeaz.com/ply)
 Grammar
 
 Rule 0     S' -> S
-Rule 1     S -> PROC IDENT PAREN P PAREN
-Rule 2     P -> VAR P
-Rule 3     P -> CONST P
-Rule 4     P -> empty
-Rule 5     empty -> <empty>
+Rule 1     S -> TAG_HTML H B TAG_HTML
+Rule 2     H -> TAG_HEAD T TAG_HEAD
+Rule 3     T -> TAG_TITLE L TAG_TITLE
+Rule 4     B -> TAG_BODY P
+Rule 5     P -> TAG_P L C TAG_HR TAG_P
+Rule 6     C -> TAG_B L TAG_B
+Rule 7     L -> TEXT
+Rule 8     L -> empty
+Rule 9     empty -> <empty>
 
 Terminals, with rules where they appear
 
-CONST                : 3
-IDENT                : 1
-PAREN                : 1 1
-PROC                 : 1
-VAR                  : 2
+TAG_B                : 6 6
+TAG_BODY             : 4
+TAG_HEAD             : 2 2
+TAG_HR               : 5
+TAG_HTML             : 1 1
+TAG_P                : 5 5
+TAG_TITLE            : 3 3
+TEXT                 : 7
 error                : 
 
 Nonterminals, with rules where they appear
 
-P                    : 1 2 3
+B                    : 1
+C                    : 5
+H                    : 1
+L                    : 3 5 6
+P                    : 4
 S                    : 0
-empty                : 4
+T                    : 2
+empty                : 8
 
 Parsing method: LALR
 
 state 0
 
     (0) S' -> . S
-    (1) S -> . PROC IDENT PAREN P PAREN
+    (1) S -> . TAG_HTML H B TAG_HTML
 
-    PROC            shift and go to state 2
+    TAG_HTML        shift and go to state 2
 
     S                              shift and go to state 1
 
@@ -43,94 +55,184 @@ state 1
 
 state 2
 
-    (1) S -> PROC . IDENT PAREN P PAREN
+    (1) S -> TAG_HTML . H B TAG_HTML
+    (2) H -> . TAG_HEAD T TAG_HEAD
 
-    IDENT           shift and go to state 3
+    TAG_HEAD        shift and go to state 4
 
+    H                              shift and go to state 3
 
 state 3
 
-    (1) S -> PROC IDENT . PAREN P PAREN
+    (1) S -> TAG_HTML H . B TAG_HTML
+    (4) B -> . TAG_BODY P
 
-    PAREN           shift and go to state 4
+    TAG_BODY        shift and go to state 6
 
+    B                              shift and go to state 5
 
 state 4
 
-    (1) S -> PROC IDENT PAREN . P PAREN
-    (2) P -> . VAR P
-    (3) P -> . CONST P
-    (4) P -> . empty
-    (5) empty -> .
+    (2) H -> TAG_HEAD . T TAG_HEAD
+    (3) T -> . TAG_TITLE L TAG_TITLE
 
-    VAR             shift and go to state 6
-    CONST           shift and go to state 7
-    PAREN           reduce using rule 5 (empty -> .)
+    TAG_TITLE       shift and go to state 8
 
-    P                              shift and go to state 5
-    empty                          shift and go to state 8
+    T                              shift and go to state 7
 
 state 5
 
-    (1) S -> PROC IDENT PAREN P . PAREN
+    (1) S -> TAG_HTML H B . TAG_HTML
 
-    PAREN           shift and go to state 9
+    TAG_HTML        shift and go to state 9
 
 
 state 6
 
-    (2) P -> VAR . P
-    (2) P -> . VAR P
-    (3) P -> . CONST P
-    (4) P -> . empty
-    (5) empty -> .
+    (4) B -> TAG_BODY . P
+    (5) P -> . TAG_P L C TAG_HR TAG_P
 
-    VAR             shift and go to state 6
-    CONST           shift and go to state 7
-    PAREN           reduce using rule 5 (empty -> .)
+    TAG_P           shift and go to state 11
 
     P                              shift and go to state 10
-    empty                          shift and go to state 8
 
 state 7
 
-    (3) P -> CONST . P
-    (2) P -> . VAR P
-    (3) P -> . CONST P
-    (4) P -> . empty
-    (5) empty -> .
+    (2) H -> TAG_HEAD T . TAG_HEAD
 
-    VAR             shift and go to state 6
-    CONST           shift and go to state 7
-    PAREN           reduce using rule 5 (empty -> .)
+    TAG_HEAD        shift and go to state 12
 
-    P                              shift and go to state 11
-    empty                          shift and go to state 8
 
 state 8
 
-    (4) P -> empty .
+    (3) T -> TAG_TITLE . L TAG_TITLE
+    (7) L -> . TEXT
+    (8) L -> . empty
+    (9) empty -> .
 
-    PAREN           reduce using rule 4 (P -> empty .)
+    TEXT            shift and go to state 14
+    TAG_TITLE       reduce using rule 9 (empty -> .)
 
+    L                              shift and go to state 13
+    empty                          shift and go to state 15
 
 state 9
 
-    (1) S -> PROC IDENT PAREN P PAREN .
+    (1) S -> TAG_HTML H B TAG_HTML .
 
-    $end            reduce using rule 1 (S -> PROC IDENT PAREN P PAREN .)
+    $end            reduce using rule 1 (S -> TAG_HTML H B TAG_HTML .)
 
 
 state 10
 
-    (2) P -> VAR P .
+    (4) B -> TAG_BODY P .
 
-    PAREN           reduce using rule 2 (P -> VAR P .)
+    TAG_HTML        reduce using rule 4 (B -> TAG_BODY P .)
 
 
 state 11
 
-    (3) P -> CONST P .
+    (5) P -> TAG_P . L C TAG_HR TAG_P
+    (7) L -> . TEXT
+    (8) L -> . empty
+    (9) empty -> .
 
-    PAREN           reduce using rule 3 (P -> CONST P .)
+    TEXT            shift and go to state 14
+    TAG_B           reduce using rule 9 (empty -> .)
+
+    L                              shift and go to state 16
+    empty                          shift and go to state 15
+
+state 12
+
+    (2) H -> TAG_HEAD T TAG_HEAD .
+
+    TAG_BODY        reduce using rule 2 (H -> TAG_HEAD T TAG_HEAD .)
+
+
+state 13
+
+    (3) T -> TAG_TITLE L . TAG_TITLE
+
+    TAG_TITLE       shift and go to state 17
+
+
+state 14
+
+    (7) L -> TEXT .
+
+    TAG_TITLE       reduce using rule 7 (L -> TEXT .)
+    TAG_B           reduce using rule 7 (L -> TEXT .)
+
+
+state 15
+
+    (8) L -> empty .
+
+    TAG_TITLE       reduce using rule 8 (L -> empty .)
+    TAG_B           reduce using rule 8 (L -> empty .)
+
+
+state 16
+
+    (5) P -> TAG_P L . C TAG_HR TAG_P
+    (6) C -> . TAG_B L TAG_B
+
+    TAG_B           shift and go to state 19
+
+    C                              shift and go to state 18
+
+state 17
+
+    (3) T -> TAG_TITLE L TAG_TITLE .
+
+    TAG_HEAD        reduce using rule 3 (T -> TAG_TITLE L TAG_TITLE .)
+
+
+state 18
+
+    (5) P -> TAG_P L C . TAG_HR TAG_P
+
+    TAG_HR          shift and go to state 20
+
+
+state 19
+
+    (6) C -> TAG_B . L TAG_B
+    (7) L -> . TEXT
+    (8) L -> . empty
+    (9) empty -> .
+
+    TEXT            shift and go to state 14
+    TAG_B           reduce using rule 9 (empty -> .)
+
+    L                              shift and go to state 21
+    empty                          shift and go to state 15
+
+state 20
+
+    (5) P -> TAG_P L C TAG_HR . TAG_P
+
+    TAG_P           shift and go to state 22
+
+
+state 21
+
+    (6) C -> TAG_B L . TAG_B
+
+    TAG_B           shift and go to state 23
+
+
+state 22
+
+    (5) P -> TAG_P L C TAG_HR TAG_P .
+
+    TAG_HTML        reduce using rule 5 (P -> TAG_P L C TAG_HR TAG_P .)
+
+
+state 23
+
+    (6) C -> TAG_B L TAG_B .
+
+    TAG_HR          reduce using rule 6 (C -> TAG_B L TAG_B .)
 

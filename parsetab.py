@@ -6,9 +6,9 @@ _tabversion = '3.10'
 
 _lr_method = 'LALR'
 
-_lr_signature = 'CONST IDENT PAREN PROC VARS : PROC IDENT PAREN P PARENP : VAR P\n        | CONST P \n        | emptyempty : '
+_lr_signature = 'TAG_B TAG_BODY TAG_HEAD TAG_HR TAG_HTML TAG_P TAG_TITLE TEXTS : TAG_HTML H B TAG_HTMLH : TAG_HEAD T TAG_HEADT : TAG_TITLE L TAG_TITLEB : TAG_BODY PP : TAG_P L C TAG_HR TAG_PC : TAG_B L TAG_BL : TEXT\n        | emptyempty : '
     
-_lr_action_items = {'PROC':([0,],[2,]),'$end':([1,9,],[0,-1,]),'IDENT':([2,],[3,]),'PAREN':([3,4,5,6,7,8,10,11,],[4,-5,9,-5,-5,-4,-2,-3,]),'VAR':([4,6,7,],[6,6,6,]),'CONST':([4,6,7,],[7,7,7,]),}
+_lr_action_items = {'TAG_HTML':([0,5,10,22,],[2,9,-4,-5,]),'$end':([1,9,],[0,-1,]),'TAG_HEAD':([2,7,17,],[4,12,-3,]),'TAG_BODY':([3,12,],[6,-2,]),'TAG_TITLE':([4,8,13,14,15,],[8,-9,17,-7,-8,]),'TAG_P':([6,20,],[11,22,]),'TEXT':([8,11,19,],[14,14,14,]),'TAG_B':([11,14,15,16,19,21,],[-9,-7,-8,19,-9,23,]),'TAG_HR':([18,23,],[20,-6,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -17,7 +17,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'S':([0,],[1,]),'P':([4,6,7,],[5,10,11,]),'empty':([4,6,7,],[8,8,8,]),}
+_lr_goto_items = {'S':([0,],[1,]),'H':([2,],[3,]),'B':([3,],[5,]),'T':([4,],[7,]),'P':([6,],[10,]),'L':([8,11,19,],[13,16,21,]),'empty':([8,11,19,],[15,15,15,]),'C':([16,],[18,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -27,9 +27,13 @@ for _k, _v in _lr_goto_items.items():
 del _lr_goto_items
 _lr_productions = [
   ("S' -> S","S'",1,None,None,None),
-  ('S -> PROC IDENT PAREN P PAREN','S',5,'p_S','ejercicio2TP7.py',24),
-  ('P -> VAR P','P',2,'p_P','ejercicio2TP7.py',27),
-  ('P -> CONST P','P',2,'p_P','ejercicio2TP7.py',28),
-  ('P -> empty','P',1,'p_P','ejercicio2TP7.py',29),
-  ('empty -> <empty>','empty',0,'p_empty','ejercicio2TP7.py',32),
+  ('S -> TAG_HTML H B TAG_HTML','S',4,'p_S','ejercicio3TP7.py',27),
+  ('H -> TAG_HEAD T TAG_HEAD','H',3,'p_H','ejercicio3TP7.py',30),
+  ('T -> TAG_TITLE L TAG_TITLE','T',3,'p_T','ejercicio3TP7.py',33),
+  ('B -> TAG_BODY P','B',2,'p_B','ejercicio3TP7.py',36),
+  ('P -> TAG_P L C TAG_HR TAG_P','P',5,'p_P','ejercicio3TP7.py',39),
+  ('C -> TAG_B L TAG_B','C',3,'p_C','ejercicio3TP7.py',42),
+  ('L -> TEXT','L',1,'p_L','ejercicio3TP7.py',45),
+  ('L -> empty','L',1,'p_L','ejercicio3TP7.py',46),
+  ('empty -> <empty>','empty',0,'p_empty','ejercicio3TP7.py',49),
 ]
