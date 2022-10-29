@@ -1,6 +1,7 @@
 import ply.lex as lex 
+from ply import yacc
 # Import Data
-filename='textoPrueba.txt'
+filename='textoPrueba2.txt'
 try:
     f = open(filename)
     data = f.read()
@@ -73,9 +74,83 @@ def t_newline(t):
   r'\n'
   t.lexer.lineno+=1
 
+#-------------------------------------------------------------------------------------------------
+def p_S(p):
+  '''S : PROG_BEGIN LIBS CUERPO PROG_END'''
+  pass
+def p_CUERPO(p):
+  '''CUERPO : SENTENCIA PUNTO CUERPO 
+    | empty'''
+  pass
+def p_SENTENTCIA(p):
+  '''SENTENCIA : DEF_VBLES 
+    | ASIGNACIONES
+    | SETUP
+    | LOOP PICO_OPEN PICO_CLOSE'''
+  pass
+
+#def loops-------------------------------------------------------------
+def p_SETUP(p):
+  '''SETUP : DEF_PIN PICO_OPEN TIPO_PIN DPUNTOS TD_ENTERO PICO_CLOSE
+    | DEF_PIN PICO_OPEN TIPO_PIN DPUNTOS DEF_VBLES PICO_CLOSE'''
+  pass
+#def setup-------------------------------------------------------------
+def p_LOOP(p):
+  '''LOOP : BWD
+    | FWD
+    | RIGHT
+    | LEFT
+    | WAIT
+    | STOP'''
+  pass
+#definición de Variables----------------------------------------------
+def p_DEF_VBLES(p):
+  '''DEF_VBLES : DEF_VAR PICO_OPEN VARIABLE PICO_CLOSE'''
+  pass
+def p_VARIABLE(p):
+  '''VARIABLE : TIPO DPUNTOS NOMBRE_VAR'''
+  pass
+def p_TIPO(p):
+  '''TIPO : TD_ENTERO
+    | TD_TEXTO
+    | TD_DECIMAL
+    | TD_LOGICO'''
+  pass
+#asignaciones-----------------------------------------------------------
+def p_ASIGNACIONES(p):
+  '''ASIGNACIONES : NOMBRE_VAR ASIGNAR ASIGN_LDERECHO'''
+  pass
+def p_ASIGN_LDERECHO(p):
+  '''ASIGN_LDERECHO : NOMBRE_VAR 
+    | VALOR_ENTERO
+    | VALOR_TEXTO
+    | DECIMAL
+    | LOGICO'''
+  pass
+
+#Producciones Librerías------------------------------------------------
+def p_LIBS(p):
+  '''LIBS : ADD_LIB_EXT PICO_OPEN LIBRERIA PICO_CLOSE PUNTO'''
+  pass
+def p_LIBRERIA(p):
+  '''LIBRERIA : NOMBRE_VAR PUNTO NOMBRE_VAR 
+    | NOMBRE_VAR PUNTO NOMBRE_VAR COMA LIBRERIA'''
+  pass
+def p_empty(p):
+  '''empty : '''
+  pass
+
+def p_error(p):
+  print("Error sintáctico en la línea: " + str(p.lineno)
+              + ". No se esperaba el token: " + str(p.value))        
+  raise Exception('syntax', 'error')
+
+
+
 #DEF LEX
 lexer = lex.lex()
 lexer.input(data)
+parser = yacc.yacc('LALR')
 
 print('Token - Lexema - Line')
 while True:
@@ -83,3 +158,9 @@ while True:
   if not tok: break
   print('(', tok.type, ',', tok.value, ',', tok.lineno, ')')
 
+try:
+  print('ANALISIS SINTÁCTICO')
+  parser.parse(data)
+  print('¡Analisis sintactico corecto!')           
+except: 
+  print ('Analisis sintáctico incorrecto')

@@ -1,0 +1,13 @@
+PROG_BEGIN
+ADD<nomreDeLibreria.extension>.
+VAR <entero:MD1>.
+VAR <entero:MD2>.
+MD2:=3.
+//INICIO DE LA SECCION SETUP
+PIN<OUT:MD1>.
+PIN<OUT:MD2>.
+//FIN DE LA SECCION LOOP
+FOWARD<>.
+LEFT<>.
+STOP<>.
+PROG_END
