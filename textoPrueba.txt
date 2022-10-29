@@ -1,0 +1,38 @@
+PROG_BEGIN
+ADD<nombreDeLibreria.extension>,ADD<nombreDeLibreria.extension>, ADD<nombreDeLibreria.extension>.
+int 456153
+String "jasdas adSAD"
+float 023.2656
+bool TRUE FALSE
+VAR<String:nombre_variable>.
+VAR<int:aasads12_3>.
+vble1:= variable.
+vble2 := 120.
+vble3:= "HOLAAAA".
+FUNC nombre<tipo1: arg1, tipo2: arg3, tipon: argn>:
+retorno
+PIN<INP:12>
+PIN<OUT:5>
+//comentario de linea
+/*comentario en bloque*/
+/* pruebacomentario1
+Pruebacomentario2
+Pruebacomentario3*/
+IF <> BEGIN END ELSE BEGIN END 
+IF <> BEGIN END
+WHILE <> BEGIN END
+PROG_END
+PROG_BEGIN
+ADD<nomreDeLibreria.extension>.
+VAR <entero:MD1>.
+VAR <entero:MD2>.
+MD2:=3.
+//INICIO DE LA SECCION SETUP
+PIN<OUT:MD1>.
+PIN<OUT:MD2>.
+//FIN DE LA SECCION LOOP
+FOWARD<>.
+LEFT<>.
+STOP<>.
+PROG_END
+
