@@ -79,15 +79,17 @@ def p_S(p):
   '''S : PROG_BEGIN LIBS CUERPO PROG_END'''
   pass
 def p_CUERPO(p):
-  '''CUERPO : SENTENCIA PUNTO CUERPO 
+  '''CUERPO : SENTENCIA CUERPO 
     | empty'''
   pass
 def p_SENTENTCIA(p):
-  '''SENTENCIA : DEF_VBLES 
-    | ASIGNACIONES
-    | SETUP
-    | LOOP PICO_OPEN PICO_CLOSE
-    | FUNCIONES'''
+  '''SENTENCIA : DEF_VBLES PUNTO
+    | ASIGNACIONES PUNTO
+    | SETUP PUNTO
+    | LOOP PICO_OPEN PICO_CLOSE PUNTO
+    | FUNCIONES PUNTO
+    | CONDICIONALES
+    | CICLO'''
   pass
 
 #def loops-------------------------------------------------------------
@@ -132,7 +134,7 @@ def p_ASIGN_LDERECHO(p):
     | DECIMAL
     | LOGICO'''
   pass
-#funciones--------------------------------------------------------------
+#Funciones--------------------------------------------------------------
 def p_FUNCIONES(p):
   '''FUNCIONES : DEF_FUN NOMBRE_VAR PICO_OPEN ARGUMENTOS PICO_CLOSE DPUNTOS CUERPO RETORNO'''
   pass
@@ -140,7 +142,18 @@ def p_ARGUMENTOS(p):
   '''ARGUMENTOS : TIPO DPUNTOS NOMBRE_VAR COMA ARGUMENTOS
     | TIPO DPUNTOS NOMBRE_VAR'''
   pass
-
+#Condicionales
+def p_CONDICIONALES(p):
+  '''CONDICIONALES : IF CONDICION BEGIN CUERPO END ELSE BEGIN CUERPO END
+    | IF CONDICION BEGIN CUERPO END'''
+  pass
+#Ciclos
+def p_CICLO(p):
+  '''CICLO : WHILE CONDICION BEGIN CUERPO END'''
+  pass
+def p_CONDICION(p):
+  '''CONDICION : PICO_OPEN NOMBRE_VAR OPERADOR NOMBRE_VAR PICO_CLOSE'''
+  pass
 #Producciones Librerías------------------------------------------------
 def p_LIBS(p):
   '''LIBS : ADD_LIB_EXT PICO_OPEN LIBRERIA PICO_CLOSE PUNTO'''
