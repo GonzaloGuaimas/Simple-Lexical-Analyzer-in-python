@@ -14,10 +14,10 @@ reserved = {
   'PROG_BEGIN' : 'PROG_BEGIN',
   'PROG_END' : 'PROG_END',
   'ADD' : 'ADD_LIB_EXT',
-  'int' : 'TD_ENTERO',
-  'String' : 'TD_TEXTO',
-  'float' : 'TD_DECIMAL',
-  'bool' : 'TD_LOGICO',
+  'entero' : 'TD_ENTERO',
+  'texto' : 'TD_TEXTO',
+  'decimal' : 'TD_DECIMAL',
+  'logico' : 'TD_LOGICO',
   'VAR' : 'DEF_VAR',
   'FUNC' : 'DEF_FUN',
   'retorno' : 'RETORNO',
@@ -42,7 +42,7 @@ reserved = {
   'STOP' : 'STOP',
   }
 
-tokens = ['PUNTO','PICO_OPEN','PICO_CLOSE','PARENT_OPEN','PARENT_CLOSE','COMA','VALOR_ENTERO','VALOR_TEXTO','DECIMAL','LOGICO','DPUNTOS','ASIGNAR','OPERADOR','TIPO_PIN','NOMBRE_VAR'] + list(reserved.values())
+tokens = ['PUNTO','PICO_OPEN','PICO_CLOSE','PARENT_OPEN','PARENT_CLOSE','COMA','VALOR_ENTERO','VALOR_TEXTO','DECIMAL','LOGICO','DPUNTOS','ASIGNAR','OPERADOR','NOMBRE_VAR'] + list(reserved.values())
 
 #Exp. regulares
 t_PUNTO = r'\.' #change name more general
@@ -92,7 +92,11 @@ def p_SENTENTCIA(p):
 #def loops-------------------------------------------------------------
 def p_SETUP(p):
   '''SETUP : DEF_PIN PICO_OPEN TIPO_PIN DPUNTOS TD_ENTERO PICO_CLOSE
-    | DEF_PIN PICO_OPEN TIPO_PIN DPUNTOS DEF_VBLES PICO_CLOSE'''
+    | DEF_PIN PICO_OPEN TIPO_PIN DPUNTOS NOMBRE_VAR PICO_CLOSE'''
+  pass
+def p_TIPO_PIN(p):
+  '''TIPO_PIN : TP_OUT 
+    | TP_INP'''
   pass
 #def setup-------------------------------------------------------------
 def p_LOOP(p):
