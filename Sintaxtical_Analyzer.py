@@ -86,7 +86,8 @@ def p_SENTENTCIA(p):
   '''SENTENCIA : DEF_VBLES 
     | ASIGNACIONES
     | SETUP
-    | LOOP PICO_OPEN PICO_CLOSE'''
+    | LOOP PICO_OPEN PICO_CLOSE
+    | FUNCIONES'''
   pass
 
 #def loops-------------------------------------------------------------
@@ -130,6 +131,14 @@ def p_ASIGN_LDERECHO(p):
     | VALOR_TEXTO
     | DECIMAL
     | LOGICO'''
+  pass
+#funciones--------------------------------------------------------------
+def p_FUNCIONES(p):
+  '''FUNCIONES : DEF_FUN NOMBRE_VAR PICO_OPEN ARGUMENTOS PICO_CLOSE DPUNTOS CUERPO RETORNO'''
+  pass
+def p_ARGUMENTOS(p):
+  '''ARGUMENTOS : TIPO DPUNTOS NOMBRE_VAR COMA ARGUMENTOS
+    | TIPO DPUNTOS NOMBRE_VAR'''
   pass
 
 #Producciones Librerías------------------------------------------------
