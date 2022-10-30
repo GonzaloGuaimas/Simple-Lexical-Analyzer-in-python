@@ -86,7 +86,7 @@ def p_SENTENTCIA(p):
   '''SENTENCIA : DEF_VBLES PUNTO
     | ASIGNACIONES PUNTO
     | SETUP PUNTO
-    | LOOP PICO_OPEN PICO_CLOSE PUNTO
+    | LOOP PUNTO
     | FUNCIONES PUNTO
     | CONDICIONALES
     | CICLO'''
@@ -104,11 +104,16 @@ def p_TIPO_PIN(p):
 #def setup-------------------------------------------------------------
 def p_LOOP(p):
   '''LOOP : BWD
-    | FWD
-    | RIGHT
-    | LEFT
-    | WAIT
-    | STOP'''
+    | FWD PICO_OPEN PICO_CLOSE
+    | RIGHT PICO_OPEN PICO_CLOSE
+    | LEFT PICO_OPEN PICO_CLOSE
+    | WAIT PICO_OPEN VALOR_TIEMPO PICO_CLOSE
+    | STOP PICO_OPEN PICO_CLOSE'''
+  pass
+def p_VALOR_TIEMPO(p):
+  '''VALOR_TIEMPO : NOMBRE_VAR
+    | VALOR_ENTERO
+    | DECIMAL'''
   pass
 #definición de Variables----------------------------------------------
 def p_DEF_VBLES(p):
