@@ -42,29 +42,32 @@ reserved = {
   'STOP' : 'STOP',
   }
 
-tokens = ['PUNTO','PICO_OPEN','PICO_CLOSE','PARENT_OPEN','PARENT_CLOSE','COMA','VALOR_ENTERO','VALOR_TEXTO','DECIMAL','LOGICO','DPUNTOS','ASIGNAR','OPERADOR','NOMBRE_VAR'] + list(reserved.values())
+tokens = ['PUNTO','PICO_OPEN','PICO_CLOSE','PARENT_OPEN','PARENT_CLOSE','COMA','VALOR_ENTERO','VALOR_TEXTO','DECIMAL','LOGICO','DPUNTOS','ASIGNAR','OPERADOR','NOMBRE_VAR','EXTENSION'] + list(reserved.values())
 
 #Exp. regulares
-t_PUNTO = r'\.' #change name more general
+t_PUNTO = r'\.'
 t_PICO_OPEN = r'<'
 t_PICO_CLOSE = r'>'
 t_PARENT_OPEN = r'\('
 t_PARENT_CLOSE = r'\)'
 t_COMA = r'\,'
 t_VALOR_ENTERO = r'[0-9]+'
+t_EXTENSION = r'\.[a-z][a-z][a-z]'
 t_VALOR_TEXTO = r'\".*\"'
 t_DECIMAL = r'[0-9]+\.[0-9]+'
 t_ASIGNAR = r'(:=)'
 t_DPUNTOS = r'\:'
-t_OPERADOR = r'(\+ | - | >= | <= | == | !=)' # disable / signs
+t_OPERADOR = r'(\+ | - | >= | <= | == | !=)'
 #3. Ignores
 t_ignore_ESPACIOS = r'[ ]+'
-t_ignore_COMENT =  r'(/\*(.|\n)*?\*/)|(//.*)' #fix
+t_ignore_COMENT =  r'(/\*(.|\n)*?\*/)|(//.*)'
 
 def t_NOMBRE_VAR(t):
   r'[a-zA-Z][a-zA-Z0-9_]+'
   t.type = reserved.get(t.value,'NOMBRE_VAR') # Check for reserved words
   return t
+
+
 
 def t_error(t):
   print("Se encontró un error en %s" % repr(t.value[0]))
@@ -164,8 +167,8 @@ def p_LIBS(p):
   '''LIBS : ADD_LIB_EXT PICO_OPEN LIBRERIA PICO_CLOSE PUNTO'''
   pass
 def p_LIBRERIA(p):
-  '''LIBRERIA : NOMBRE_VAR PUNTO NOMBRE_VAR 
-    | NOMBRE_VAR PUNTO NOMBRE_VAR COMA LIBRERIA'''
+  '''LIBRERIA : NOMBRE_VAR EXTENSION 
+    | NOMBRE_VAR EXTENSION COMA LIBRERIA'''
   pass
 def p_empty(p):
   '''empty : '''
