@@ -1,0 +1,1422 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    BOOL_F
+    BOOL_T
+    PARENT_CLOSE
+    PARENT_OPEN
+
+Grammar
+
+Rule 0     S' -> S
+Rule 1     S -> PROG_BEGIN LIBS CUERPO PROG_END
+Rule 2     CUERPO -> SENTENCIA CUERPO
+Rule 3     CUERPO -> empty
+Rule 4     SENTENCIA -> DEF_VBLES PUNTO
+Rule 5     SENTENCIA -> ASIGNACIONES PUNTO
+Rule 6     SENTENCIA -> SETUP PUNTO
+Rule 7     SENTENCIA -> LOOP PUNTO
+Rule 8     SENTENCIA -> FUNCIONES PUNTO
+Rule 9     SENTENCIA -> CONDICIONALES
+Rule 10    SENTENCIA -> CICLO
+Rule 11    SETUP -> DEF_PIN PICO_OPEN TIPO_PIN DPUNTOS TD_ENTERO PICO_CLOSE
+Rule 12    SETUP -> DEF_PIN PICO_OPEN TIPO_PIN DPUNTOS NOMBRE_VAR PICO_CLOSE
+Rule 13    TIPO_PIN -> TP_OUT
+Rule 14    TIPO_PIN -> TP_INP
+Rule 15    LOOP -> BWD
+Rule 16    LOOP -> FWD PICO_OPEN PICO_CLOSE
+Rule 17    LOOP -> RIGHT PICO_OPEN PICO_CLOSE
+Rule 18    LOOP -> LEFT PICO_OPEN PICO_CLOSE
+Rule 19    LOOP -> WAIT PICO_OPEN VALOR_TIEMPO PICO_CLOSE
+Rule 20    LOOP -> STOP PICO_OPEN PICO_CLOSE
+Rule 21    VALOR_TIEMPO -> NOMBRE_VAR
+Rule 22    VALOR_TIEMPO -> VALOR_ENTERO
+Rule 23    VALOR_TIEMPO -> DECIMAL
+Rule 24    DEF_VBLES -> DEF_VAR PICO_OPEN VARIABLE PICO_CLOSE
+Rule 25    VARIABLE -> TIPO DPUNTOS NOMBRE_VAR
+Rule 26    TIPO -> TD_ENTERO
+Rule 27    TIPO -> TD_TEXTO
+Rule 28    TIPO -> TD_DECIMAL
+Rule 29    TIPO -> TD_LOGICO
+Rule 30    ASIGNACIONES -> NOMBRE_VAR ASIGNAR ASIGN_LDERECHO
+Rule 31    ASIGN_LDERECHO -> NOMBRE_VAR
+Rule 32    ASIGN_LDERECHO -> VALOR_ENTERO
+Rule 33    ASIGN_LDERECHO -> VALOR_TEXTO
+Rule 34    ASIGN_LDERECHO -> DECIMAL
+Rule 35    ASIGN_LDERECHO -> LOGICO
+Rule 36    FUNCIONES -> DEF_FUN NOMBRE_VAR PICO_OPEN ARGUMENTOS PICO_CLOSE DPUNTOS CUERPO RETORNO
+Rule 37    ARGUMENTOS -> TIPO DPUNTOS NOMBRE_VAR COMA ARGUMENTOS
+Rule 38    ARGUMENTOS -> TIPO DPUNTOS NOMBRE_VAR
+Rule 39    CONDICIONALES -> IF CONDICION BEGIN CUERPO END ELSE BEGIN CUERPO END
+Rule 40    CONDICIONALES -> IF CONDICION BEGIN CUERPO END
+Rule 41    CICLO -> WHILE CONDICION BEGIN CUERPO END
+Rule 42    CONDICION -> PICO_OPEN NOMBRE_VAR OPERADOR NOMBRE_VAR PICO_CLOSE
+Rule 43    LIBS -> ADD_LIB_EXT PICO_OPEN LIBRERIA PICO_CLOSE PUNTO
+Rule 44    LIBRERIA -> NOMBRE_VAR EXTENSION
+Rule 45    LIBRERIA -> NOMBRE_VAR EXTENSION COMA LIBRERIA
+Rule 46    empty -> <empty>
+
+Terminals, with rules where they appear
+
+ADD_LIB_EXT          : 43
+ASIGNAR              : 30
+BEGIN                : 39 39 40 41
+BOOL_F               : 
+BOOL_T               : 
+BWD                  : 15
+COMA                 : 37 45
+DECIMAL              : 23 34
+DEF_FUN              : 36
+DEF_PIN              : 11 12
+DEF_VAR              : 24
+DPUNTOS              : 11 12 25 36 37 38
+ELSE                 : 39
+END                  : 39 39 40 41
+EXTENSION            : 44 45
+FWD                  : 16
+IF                   : 39 40
+LEFT                 : 18
+LOGICO               : 35
+NOMBRE_VAR           : 12 21 25 30 31 36 37 38 42 42 44 45
+OPERADOR             : 42
+PARENT_CLOSE         : 
+PARENT_OPEN          : 
+PICO_CLOSE           : 11 12 16 17 18 19 20 24 36 42 43
+PICO_OPEN            : 11 12 16 17 18 19 20 24 36 42 43
+PROG_BEGIN           : 1
+PROG_END             : 1
+PUNTO                : 4 5 6 7 8 43
+RETORNO              : 36
+RIGHT                : 17
+STOP                 : 20
+TD_DECIMAL           : 28
+TD_ENTERO            : 11 26
+TD_LOGICO            : 29
+TD_TEXTO             : 27
+TP_INP               : 14
+TP_OUT               : 13
+VALOR_ENTERO         : 22 32
+VALOR_TEXTO          : 33
+WAIT                 : 19
+WHILE                : 41
+error                : 
+
+Nonterminals, with rules where they appear
+
+ARGUMENTOS           : 36 37
+ASIGNACIONES         : 5
+ASIGN_LDERECHO       : 30
+CICLO                : 10
+CONDICION            : 39 40 41
+CONDICIONALES        : 9
+CUERPO               : 1 2 36 39 39 40 41
+DEF_VBLES            : 4
+FUNCIONES            : 8
+LIBRERIA             : 43 45
+LIBS                 : 1
+LOOP                 : 7
+S                    : 0
+SENTENCIA            : 2
+SETUP                : 6
+TIPO                 : 25 37 38
+TIPO_PIN             : 11 12
+VALOR_TIEMPO         : 19
+VARIABLE             : 24
+empty                : 3
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . S
+    (1) S -> . PROG_BEGIN LIBS CUERPO PROG_END
+
+    PROG_BEGIN      shift and go to state 2
+
+    S                              shift and go to state 1
+
+state 1
+
+    (0) S' -> S .
+
+
+
+state 2
+
+    (1) S -> PROG_BEGIN . LIBS CUERPO PROG_END
+    (43) LIBS -> . ADD_LIB_EXT PICO_OPEN LIBRERIA PICO_CLOSE PUNTO
+
+    ADD_LIB_EXT     shift and go to state 4
+
+    LIBS                           shift and go to state 3
+
+state 3
+
+    (1) S -> PROG_BEGIN LIBS . CUERPO PROG_END
+    (2) CUERPO -> . SENTENCIA CUERPO
+    (3) CUERPO -> . empty
+    (4) SENTENCIA -> . DEF_VBLES PUNTO
+    (5) SENTENCIA -> . ASIGNACIONES PUNTO
+    (6) SENTENCIA -> . SETUP PUNTO
+    (7) SENTENCIA -> . LOOP PUNTO
+    (8) SENTENCIA -> . FUNCIONES PUNTO
+    (9) SENTENCIA -> . CONDICIONALES
+    (10) SENTENCIA -> . CICLO
+    (46) empty -> .
+    (24) DEF_VBLES -> . DEF_VAR PICO_OPEN VARIABLE PICO_CLOSE
+    (30) ASIGNACIONES -> . NOMBRE_VAR ASIGNAR ASIGN_LDERECHO
+    (11) SETUP -> . DEF_PIN PICO_OPEN TIPO_PIN DPUNTOS TD_ENTERO PICO_CLOSE
+    (12) SETUP -> . DEF_PIN PICO_OPEN TIPO_PIN DPUNTOS NOMBRE_VAR PICO_CLOSE
+    (15) LOOP -> . BWD
+    (16) LOOP -> . FWD PICO_OPEN PICO_CLOSE
+    (17) LOOP -> . RIGHT PICO_OPEN PICO_CLOSE
+    (18) LOOP -> . LEFT PICO_OPEN PICO_CLOSE
+    (19) LOOP -> . WAIT PICO_OPEN VALOR_TIEMPO PICO_CLOSE
+    (20) LOOP -> . STOP PICO_OPEN PICO_CLOSE
+    (36) FUNCIONES -> . DEF_FUN NOMBRE_VAR PICO_OPEN ARGUMENTOS PICO_CLOSE DPUNTOS CUERPO RETORNO
+    (39) CONDICIONALES -> . IF CONDICION BEGIN CUERPO END ELSE BEGIN CUERPO END
+    (40) CONDICIONALES -> . IF CONDICION BEGIN CUERPO END
+    (41) CICLO -> . WHILE CONDICION BEGIN CUERPO END
+
+    PROG_END        reduce using rule 46 (empty -> .)
+    DEF_VAR         shift and go to state 15
+    NOMBRE_VAR      shift and go to state 16
+    DEF_PIN         shift and go to state 17
+    BWD             shift and go to state 18
+    FWD             shift and go to state 19
+    RIGHT           shift and go to state 20
+    LEFT            shift and go to state 21
+    WAIT            shift and go to state 22
+    STOP            shift and go to state 23
+    DEF_FUN         shift and go to state 24
+    IF              shift and go to state 25
+    WHILE           shift and go to state 26
+
+    CUERPO                         shift and go to state 5
+    SENTENCIA                      shift and go to state 6
+    empty                          shift and go to state 7
+    DEF_VBLES                      shift and go to state 8
+    ASIGNACIONES                   shift and go to state 9
+    SETUP                          shift and go to state 10
+    LOOP                           shift and go to state 11
+    FUNCIONES                      shift and go to state 12
+    CONDICIONALES                  shift and go to state 13
+    CICLO                          shift and go to state 14
+
+state 4
+
+    (43) LIBS -> ADD_LIB_EXT . PICO_OPEN LIBRERIA PICO_CLOSE PUNTO
+
+    PICO_OPEN       shift and go to state 27
+
+
+state 5
+
+    (1) S -> PROG_BEGIN LIBS CUERPO . PROG_END
+
+    PROG_END        shift and go to state 28
+
+
+state 6
+
+    (2) CUERPO -> SENTENCIA . CUERPO
+    (2) CUERPO -> . SENTENCIA CUERPO
+    (3) CUERPO -> . empty
+    (4) SENTENCIA -> . DEF_VBLES PUNTO
+    (5) SENTENCIA -> . ASIGNACIONES PUNTO
+    (6) SENTENCIA -> . SETUP PUNTO
+    (7) SENTENCIA -> . LOOP PUNTO
+    (8) SENTENCIA -> . FUNCIONES PUNTO
+    (9) SENTENCIA -> . CONDICIONALES
+    (10) SENTENCIA -> . CICLO
+    (46) empty -> .
+    (24) DEF_VBLES -> . DEF_VAR PICO_OPEN VARIABLE PICO_CLOSE
+    (30) ASIGNACIONES -> . NOMBRE_VAR ASIGNAR ASIGN_LDERECHO
+    (11) SETUP -> . DEF_PIN PICO_OPEN TIPO_PIN DPUNTOS TD_ENTERO PICO_CLOSE
+    (12) SETUP -> . DEF_PIN PICO_OPEN TIPO_PIN DPUNTOS NOMBRE_VAR PICO_CLOSE
+    (15) LOOP -> . BWD
+    (16) LOOP -> . FWD PICO_OPEN PICO_CLOSE
+    (17) LOOP -> . RIGHT PICO_OPEN PICO_CLOSE
+    (18) LOOP -> . LEFT PICO_OPEN PICO_CLOSE
+    (19) LOOP -> . WAIT PICO_OPEN VALOR_TIEMPO PICO_CLOSE
+    (20) LOOP -> . STOP PICO_OPEN PICO_CLOSE
+    (36) FUNCIONES -> . DEF_FUN NOMBRE_VAR PICO_OPEN ARGUMENTOS PICO_CLOSE DPUNTOS CUERPO RETORNO
+    (39) CONDICIONALES -> . IF CONDICION BEGIN CUERPO END ELSE BEGIN CUERPO END
+    (40) CONDICIONALES -> . IF CONDICION BEGIN CUERPO END
+    (41) CICLO -> . WHILE CONDICION BEGIN CUERPO END
+
+    PROG_END        reduce using rule 46 (empty -> .)
+    END             reduce using rule 46 (empty -> .)
+    RETORNO         reduce using rule 46 (empty -> .)
+    DEF_VAR         shift and go to state 15
+    NOMBRE_VAR      shift and go to state 16
+    DEF_PIN         shift and go to state 17
+    BWD             shift and go to state 18
+    FWD             shift and go to state 19
+    RIGHT           shift and go to state 20
+    LEFT            shift and go to state 21
+    WAIT            shift and go to state 22
+    STOP            shift and go to state 23
+    DEF_FUN         shift and go to state 24
+    IF              shift and go to state 25
+    WHILE           shift and go to state 26
+
+    SENTENCIA                      shift and go to state 6
+    CUERPO                         shift and go to state 29
+    empty                          shift and go to state 7
+    DEF_VBLES                      shift and go to state 8
+    ASIGNACIONES                   shift and go to state 9
+    SETUP                          shift and go to state 10
+    LOOP                           shift and go to state 11
+    FUNCIONES                      shift and go to state 12
+    CONDICIONALES                  shift and go to state 13
+    CICLO                          shift and go to state 14
+
+state 7
+
+    (3) CUERPO -> empty .
+
+    PROG_END        reduce using rule 3 (CUERPO -> empty .)
+    END             reduce using rule 3 (CUERPO -> empty .)
+    RETORNO         reduce using rule 3 (CUERPO -> empty .)
+
+
+state 8
+
+    (4) SENTENCIA -> DEF_VBLES . PUNTO
+
+    PUNTO           shift and go to state 30
+
+
+state 9
+
+    (5) SENTENCIA -> ASIGNACIONES . PUNTO
+
+    PUNTO           shift and go to state 31
+
+
+state 10
+
+    (6) SENTENCIA -> SETUP . PUNTO
+
+    PUNTO           shift and go to state 32
+
+
+state 11
+
+    (7) SENTENCIA -> LOOP . PUNTO
+
+    PUNTO           shift and go to state 33
+
+
+state 12
+
+    (8) SENTENCIA -> FUNCIONES . PUNTO
+
+    PUNTO           shift and go to state 34
+
+
+state 13
+
+    (9) SENTENCIA -> CONDICIONALES .
+
+    DEF_VAR         reduce using rule 9 (SENTENCIA -> CONDICIONALES .)
+    NOMBRE_VAR      reduce using rule 9 (SENTENCIA -> CONDICIONALES .)
+    DEF_PIN         reduce using rule 9 (SENTENCIA -> CONDICIONALES .)
+    BWD             reduce using rule 9 (SENTENCIA -> CONDICIONALES .)
+    FWD             reduce using rule 9 (SENTENCIA -> CONDICIONALES .)
+    RIGHT           reduce using rule 9 (SENTENCIA -> CONDICIONALES .)
+    LEFT            reduce using rule 9 (SENTENCIA -> CONDICIONALES .)
+    WAIT            reduce using rule 9 (SENTENCIA -> CONDICIONALES .)
+    STOP            reduce using rule 9 (SENTENCIA -> CONDICIONALES .)
+    DEF_FUN         reduce using rule 9 (SENTENCIA -> CONDICIONALES .)
+    IF              reduce using rule 9 (SENTENCIA -> CONDICIONALES .)
+    WHILE           reduce using rule 9 (SENTENCIA -> CONDICIONALES .)
+    PROG_END        reduce using rule 9 (SENTENCIA -> CONDICIONALES .)
+    END             reduce using rule 9 (SENTENCIA -> CONDICIONALES .)
+    RETORNO         reduce using rule 9 (SENTENCIA -> CONDICIONALES .)
+
+
+state 14
+
+    (10) SENTENCIA -> CICLO .
+
+    DEF_VAR         reduce using rule 10 (SENTENCIA -> CICLO .)
+    NOMBRE_VAR      reduce using rule 10 (SENTENCIA -> CICLO .)
+    DEF_PIN         reduce using rule 10 (SENTENCIA -> CICLO .)
+    BWD             reduce using rule 10 (SENTENCIA -> CICLO .)
+    FWD             reduce using rule 10 (SENTENCIA -> CICLO .)
+    RIGHT           reduce using rule 10 (SENTENCIA -> CICLO .)
+    LEFT            reduce using rule 10 (SENTENCIA -> CICLO .)
+    WAIT            reduce using rule 10 (SENTENCIA -> CICLO .)
+    STOP            reduce using rule 10 (SENTENCIA -> CICLO .)
+    DEF_FUN         reduce using rule 10 (SENTENCIA -> CICLO .)
+    IF              reduce using rule 10 (SENTENCIA -> CICLO .)
+    WHILE           reduce using rule 10 (SENTENCIA -> CICLO .)
+    PROG_END        reduce using rule 10 (SENTENCIA -> CICLO .)
+    END             reduce using rule 10 (SENTENCIA -> CICLO .)
+    RETORNO         reduce using rule 10 (SENTENCIA -> CICLO .)
+
+
+state 15
+
+    (24) DEF_VBLES -> DEF_VAR . PICO_OPEN VARIABLE PICO_CLOSE
+
+    PICO_OPEN       shift and go to state 35
+
+
+state 16
+
+    (30) ASIGNACIONES -> NOMBRE_VAR . ASIGNAR ASIGN_LDERECHO
+
+    ASIGNAR         shift and go to state 36
+
+
+state 17
+
+    (11) SETUP -> DEF_PIN . PICO_OPEN TIPO_PIN DPUNTOS TD_ENTERO PICO_CLOSE
+    (12) SETUP -> DEF_PIN . PICO_OPEN TIPO_PIN DPUNTOS NOMBRE_VAR PICO_CLOSE
+
+    PICO_OPEN       shift and go to state 37
+
+
+state 18
+
+    (15) LOOP -> BWD .
+
+    PUNTO           reduce using rule 15 (LOOP -> BWD .)
+
+
+state 19
+
+    (16) LOOP -> FWD . PICO_OPEN PICO_CLOSE
+
+    PICO_OPEN       shift and go to state 38
+
+
+state 20
+
+    (17) LOOP -> RIGHT . PICO_OPEN PICO_CLOSE
+
+    PICO_OPEN       shift and go to state 39
+
+
+state 21
+
+    (18) LOOP -> LEFT . PICO_OPEN PICO_CLOSE
+
+    PICO_OPEN       shift and go to state 40
+
+
+state 22
+
+    (19) LOOP -> WAIT . PICO_OPEN VALOR_TIEMPO PICO_CLOSE
+
+    PICO_OPEN       shift and go to state 41
+
+
+state 23
+
+    (20) LOOP -> STOP . PICO_OPEN PICO_CLOSE
+
+    PICO_OPEN       shift and go to state 42
+
+
+state 24
+
+    (36) FUNCIONES -> DEF_FUN . NOMBRE_VAR PICO_OPEN ARGUMENTOS PICO_CLOSE DPUNTOS CUERPO RETORNO
+
+    NOMBRE_VAR      shift and go to state 43
+
+
+state 25
+
+    (39) CONDICIONALES -> IF . CONDICION BEGIN CUERPO END ELSE BEGIN CUERPO END
+    (40) CONDICIONALES -> IF . CONDICION BEGIN CUERPO END
+    (42) CONDICION -> . PICO_OPEN NOMBRE_VAR OPERADOR NOMBRE_VAR PICO_CLOSE
+
+    PICO_OPEN       shift and go to state 45
+
+    CONDICION                      shift and go to state 44
+
+state 26
+
+    (41) CICLO -> WHILE . CONDICION BEGIN CUERPO END
+    (42) CONDICION -> . PICO_OPEN NOMBRE_VAR OPERADOR NOMBRE_VAR PICO_CLOSE
+
+    PICO_OPEN       shift and go to state 45
+
+    CONDICION                      shift and go to state 46
+
+state 27
+
+    (43) LIBS -> ADD_LIB_EXT PICO_OPEN . LIBRERIA PICO_CLOSE PUNTO
+    (44) LIBRERIA -> . NOMBRE_VAR EXTENSION
+    (45) LIBRERIA -> . NOMBRE_VAR EXTENSION COMA LIBRERIA
+
+    NOMBRE_VAR      shift and go to state 48
+
+    LIBRERIA                       shift and go to state 47
+
+state 28
+
+    (1) S -> PROG_BEGIN LIBS CUERPO PROG_END .
+
+    $end            reduce using rule 1 (S -> PROG_BEGIN LIBS CUERPO PROG_END .)
+
+
+state 29
+
+    (2) CUERPO -> SENTENCIA CUERPO .
+
+    PROG_END        reduce using rule 2 (CUERPO -> SENTENCIA CUERPO .)
+    END             reduce using rule 2 (CUERPO -> SENTENCIA CUERPO .)
+    RETORNO         reduce using rule 2 (CUERPO -> SENTENCIA CUERPO .)
+
+
+state 30
+
+    (4) SENTENCIA -> DEF_VBLES PUNTO .
+
+    DEF_VAR         reduce using rule 4 (SENTENCIA -> DEF_VBLES PUNTO .)
+    NOMBRE_VAR      reduce using rule 4 (SENTENCIA -> DEF_VBLES PUNTO .)
+    DEF_PIN         reduce using rule 4 (SENTENCIA -> DEF_VBLES PUNTO .)
+    BWD             reduce using rule 4 (SENTENCIA -> DEF_VBLES PUNTO .)
+    FWD             reduce using rule 4 (SENTENCIA -> DEF_VBLES PUNTO .)
+    RIGHT           reduce using rule 4 (SENTENCIA -> DEF_VBLES PUNTO .)
+    LEFT            reduce using rule 4 (SENTENCIA -> DEF_VBLES PUNTO .)
+    WAIT            reduce using rule 4 (SENTENCIA -> DEF_VBLES PUNTO .)
+    STOP            reduce using rule 4 (SENTENCIA -> DEF_VBLES PUNTO .)
+    DEF_FUN         reduce using rule 4 (SENTENCIA -> DEF_VBLES PUNTO .)
+    IF              reduce using rule 4 (SENTENCIA -> DEF_VBLES PUNTO .)
+    WHILE           reduce using rule 4 (SENTENCIA -> DEF_VBLES PUNTO .)
+    PROG_END        reduce using rule 4 (SENTENCIA -> DEF_VBLES PUNTO .)
+    END             reduce using rule 4 (SENTENCIA -> DEF_VBLES PUNTO .)
+    RETORNO         reduce using rule 4 (SENTENCIA -> DEF_VBLES PUNTO .)
+
+
+state 31
+
+    (5) SENTENCIA -> ASIGNACIONES PUNTO .
+
+    DEF_VAR         reduce using rule 5 (SENTENCIA -> ASIGNACIONES PUNTO .)
+    NOMBRE_VAR      reduce using rule 5 (SENTENCIA -> ASIGNACIONES PUNTO .)
+    DEF_PIN         reduce using rule 5 (SENTENCIA -> ASIGNACIONES PUNTO .)
+    BWD             reduce using rule 5 (SENTENCIA -> ASIGNACIONES PUNTO .)
+    FWD             reduce using rule 5 (SENTENCIA -> ASIGNACIONES PUNTO .)
+    RIGHT           reduce using rule 5 (SENTENCIA -> ASIGNACIONES PUNTO .)
+    LEFT            reduce using rule 5 (SENTENCIA -> ASIGNACIONES PUNTO .)
+    WAIT            reduce using rule 5 (SENTENCIA -> ASIGNACIONES PUNTO .)
+    STOP            reduce using rule 5 (SENTENCIA -> ASIGNACIONES PUNTO .)
+    DEF_FUN         reduce using rule 5 (SENTENCIA -> ASIGNACIONES PUNTO .)
+    IF              reduce using rule 5 (SENTENCIA -> ASIGNACIONES PUNTO .)
+    WHILE           reduce using rule 5 (SENTENCIA -> ASIGNACIONES PUNTO .)
+    PROG_END        reduce using rule 5 (SENTENCIA -> ASIGNACIONES PUNTO .)
+    END             reduce using rule 5 (SENTENCIA -> ASIGNACIONES PUNTO .)
+    RETORNO         reduce using rule 5 (SENTENCIA -> ASIGNACIONES PUNTO .)
+
+
+state 32
+
+    (6) SENTENCIA -> SETUP PUNTO .
+
+    DEF_VAR         reduce using rule 6 (SENTENCIA -> SETUP PUNTO .)
+    NOMBRE_VAR      reduce using rule 6 (SENTENCIA -> SETUP PUNTO .)
+    DEF_PIN         reduce using rule 6 (SENTENCIA -> SETUP PUNTO .)
+    BWD             reduce using rule 6 (SENTENCIA -> SETUP PUNTO .)
+    FWD             reduce using rule 6 (SENTENCIA -> SETUP PUNTO .)
+    RIGHT           reduce using rule 6 (SENTENCIA -> SETUP PUNTO .)
+    LEFT            reduce using rule 6 (SENTENCIA -> SETUP PUNTO .)
+    WAIT            reduce using rule 6 (SENTENCIA -> SETUP PUNTO .)
+    STOP            reduce using rule 6 (SENTENCIA -> SETUP PUNTO .)
+    DEF_FUN         reduce using rule 6 (SENTENCIA -> SETUP PUNTO .)
+    IF              reduce using rule 6 (SENTENCIA -> SETUP PUNTO .)
+    WHILE           reduce using rule 6 (SENTENCIA -> SETUP PUNTO .)
+    PROG_END        reduce using rule 6 (SENTENCIA -> SETUP PUNTO .)
+    END             reduce using rule 6 (SENTENCIA -> SETUP PUNTO .)
+    RETORNO         reduce using rule 6 (SENTENCIA -> SETUP PUNTO .)
+
+
+state 33
+
+    (7) SENTENCIA -> LOOP PUNTO .
+
+    DEF_VAR         reduce using rule 7 (SENTENCIA -> LOOP PUNTO .)
+    NOMBRE_VAR      reduce using rule 7 (SENTENCIA -> LOOP PUNTO .)
+    DEF_PIN         reduce using rule 7 (SENTENCIA -> LOOP PUNTO .)
+    BWD             reduce using rule 7 (SENTENCIA -> LOOP PUNTO .)
+    FWD             reduce using rule 7 (SENTENCIA -> LOOP PUNTO .)
+    RIGHT           reduce using rule 7 (SENTENCIA -> LOOP PUNTO .)
+    LEFT            reduce using rule 7 (SENTENCIA -> LOOP PUNTO .)
+    WAIT            reduce using rule 7 (SENTENCIA -> LOOP PUNTO .)
+    STOP            reduce using rule 7 (SENTENCIA -> LOOP PUNTO .)
+    DEF_FUN         reduce using rule 7 (SENTENCIA -> LOOP PUNTO .)
+    IF              reduce using rule 7 (SENTENCIA -> LOOP PUNTO .)
+    WHILE           reduce using rule 7 (SENTENCIA -> LOOP PUNTO .)
+    PROG_END        reduce using rule 7 (SENTENCIA -> LOOP PUNTO .)
+    END             reduce using rule 7 (SENTENCIA -> LOOP PUNTO .)
+    RETORNO         reduce using rule 7 (SENTENCIA -> LOOP PUNTO .)
+
+
+state 34
+
+    (8) SENTENCIA -> FUNCIONES PUNTO .
+
+    DEF_VAR         reduce using rule 8 (SENTENCIA -> FUNCIONES PUNTO .)
+    NOMBRE_VAR      reduce using rule 8 (SENTENCIA -> FUNCIONES PUNTO .)
+    DEF_PIN         reduce using rule 8 (SENTENCIA -> FUNCIONES PUNTO .)
+    BWD             reduce using rule 8 (SENTENCIA -> FUNCIONES PUNTO .)
+    FWD             reduce using rule 8 (SENTENCIA -> FUNCIONES PUNTO .)
+    RIGHT           reduce using rule 8 (SENTENCIA -> FUNCIONES PUNTO .)
+    LEFT            reduce using rule 8 (SENTENCIA -> FUNCIONES PUNTO .)
+    WAIT            reduce using rule 8 (SENTENCIA -> FUNCIONES PUNTO .)
+    STOP            reduce using rule 8 (SENTENCIA -> FUNCIONES PUNTO .)
+    DEF_FUN         reduce using rule 8 (SENTENCIA -> FUNCIONES PUNTO .)
+    IF              reduce using rule 8 (SENTENCIA -> FUNCIONES PUNTO .)
+    WHILE           reduce using rule 8 (SENTENCIA -> FUNCIONES PUNTO .)
+    PROG_END        reduce using rule 8 (SENTENCIA -> FUNCIONES PUNTO .)
+    END             reduce using rule 8 (SENTENCIA -> FUNCIONES PUNTO .)
+    RETORNO         reduce using rule 8 (SENTENCIA -> FUNCIONES PUNTO .)
+
+
+state 35
+
+    (24) DEF_VBLES -> DEF_VAR PICO_OPEN . VARIABLE PICO_CLOSE
+    (25) VARIABLE -> . TIPO DPUNTOS NOMBRE_VAR
+    (26) TIPO -> . TD_ENTERO
+    (27) TIPO -> . TD_TEXTO
+    (28) TIPO -> . TD_DECIMAL
+    (29) TIPO -> . TD_LOGICO
+
+    TD_ENTERO       shift and go to state 51
+    TD_TEXTO        shift and go to state 52
+    TD_DECIMAL      shift and go to state 53
+    TD_LOGICO       shift and go to state 54
+
+    VARIABLE                       shift and go to state 49
+    TIPO                           shift and go to state 50
+
+state 36
+
+    (30) ASIGNACIONES -> NOMBRE_VAR ASIGNAR . ASIGN_LDERECHO
+    (31) ASIGN_LDERECHO -> . NOMBRE_VAR
+    (32) ASIGN_LDERECHO -> . VALOR_ENTERO
+    (33) ASIGN_LDERECHO -> . VALOR_TEXTO
+    (34) ASIGN_LDERECHO -> . DECIMAL
+    (35) ASIGN_LDERECHO -> . LOGICO
+
+    NOMBRE_VAR      shift and go to state 55
+    VALOR_ENTERO    shift and go to state 57
+    VALOR_TEXTO     shift and go to state 58
+    DECIMAL         shift and go to state 59
+    LOGICO          shift and go to state 60
+
+    ASIGN_LDERECHO                 shift and go to state 56
+
+state 37
+
+    (11) SETUP -> DEF_PIN PICO_OPEN . TIPO_PIN DPUNTOS TD_ENTERO PICO_CLOSE
+    (12) SETUP -> DEF_PIN PICO_OPEN . TIPO_PIN DPUNTOS NOMBRE_VAR PICO_CLOSE
+    (13) TIPO_PIN -> . TP_OUT
+    (14) TIPO_PIN -> . TP_INP
+
+    TP_OUT          shift and go to state 62
+    TP_INP          shift and go to state 63
+
+    TIPO_PIN                       shift and go to state 61
+
+state 38
+
+    (16) LOOP -> FWD PICO_OPEN . PICO_CLOSE
+
+    PICO_CLOSE      shift and go to state 64
+
+
+state 39
+
+    (17) LOOP -> RIGHT PICO_OPEN . PICO_CLOSE
+
+    PICO_CLOSE      shift and go to state 65
+
+
+state 40
+
+    (18) LOOP -> LEFT PICO_OPEN . PICO_CLOSE
+
+    PICO_CLOSE      shift and go to state 66
+
+
+state 41
+
+    (19) LOOP -> WAIT PICO_OPEN . VALOR_TIEMPO PICO_CLOSE
+    (21) VALOR_TIEMPO -> . NOMBRE_VAR
+    (22) VALOR_TIEMPO -> . VALOR_ENTERO
+    (23) VALOR_TIEMPO -> . DECIMAL
+
+    NOMBRE_VAR      shift and go to state 68
+    VALOR_ENTERO    shift and go to state 69
+    DECIMAL         shift and go to state 70
+
+    VALOR_TIEMPO                   shift and go to state 67
+
+state 42
+
+    (20) LOOP -> STOP PICO_OPEN . PICO_CLOSE
+
+    PICO_CLOSE      shift and go to state 71
+
+
+state 43
+
+    (36) FUNCIONES -> DEF_FUN NOMBRE_VAR . PICO_OPEN ARGUMENTOS PICO_CLOSE DPUNTOS CUERPO RETORNO
+
+    PICO_OPEN       shift and go to state 72
+
+
+state 44
+
+    (39) CONDICIONALES -> IF CONDICION . BEGIN CUERPO END ELSE BEGIN CUERPO END
+    (40) CONDICIONALES -> IF CONDICION . BEGIN CUERPO END
+
+    BEGIN           shift and go to state 73
+
+
+state 45
+
+    (42) CONDICION -> PICO_OPEN . NOMBRE_VAR OPERADOR NOMBRE_VAR PICO_CLOSE
+
+    NOMBRE_VAR      shift and go to state 74
+
+
+state 46
+
+    (41) CICLO -> WHILE CONDICION . BEGIN CUERPO END
+
+    BEGIN           shift and go to state 75
+
+
+state 47
+
+    (43) LIBS -> ADD_LIB_EXT PICO_OPEN LIBRERIA . PICO_CLOSE PUNTO
+
+    PICO_CLOSE      shift and go to state 76
+
+
+state 48
+
+    (44) LIBRERIA -> NOMBRE_VAR . EXTENSION
+    (45) LIBRERIA -> NOMBRE_VAR . EXTENSION COMA LIBRERIA
+
+    EXTENSION       shift and go to state 77
+
+
+state 49
+
+    (24) DEF_VBLES -> DEF_VAR PICO_OPEN VARIABLE . PICO_CLOSE
+
+    PICO_CLOSE      shift and go to state 78
+
+
+state 50
+
+    (25) VARIABLE -> TIPO . DPUNTOS NOMBRE_VAR
+
+    DPUNTOS         shift and go to state 79
+
+
+state 51
+
+    (26) TIPO -> TD_ENTERO .
+
+    DPUNTOS         reduce using rule 26 (TIPO -> TD_ENTERO .)
+
+
+state 52
+
+    (27) TIPO -> TD_TEXTO .
+
+    DPUNTOS         reduce using rule 27 (TIPO -> TD_TEXTO .)
+
+
+state 53
+
+    (28) TIPO -> TD_DECIMAL .
+
+    DPUNTOS         reduce using rule 28 (TIPO -> TD_DECIMAL .)
+
+
+state 54
+
+    (29) TIPO -> TD_LOGICO .
+
+    DPUNTOS         reduce using rule 29 (TIPO -> TD_LOGICO .)
+
+
+state 55
+
+    (31) ASIGN_LDERECHO -> NOMBRE_VAR .
+
+    PUNTO           reduce using rule 31 (ASIGN_LDERECHO -> NOMBRE_VAR .)
+
+
+state 56
+
+    (30) ASIGNACIONES -> NOMBRE_VAR ASIGNAR ASIGN_LDERECHO .
+
+    PUNTO           reduce using rule 30 (ASIGNACIONES -> NOMBRE_VAR ASIGNAR ASIGN_LDERECHO .)
+
+
+state 57
+
+    (32) ASIGN_LDERECHO -> VALOR_ENTERO .
+
+    PUNTO           reduce using rule 32 (ASIGN_LDERECHO -> VALOR_ENTERO .)
+
+
+state 58
+
+    (33) ASIGN_LDERECHO -> VALOR_TEXTO .
+
+    PUNTO           reduce using rule 33 (ASIGN_LDERECHO -> VALOR_TEXTO .)
+
+
+state 59
+
+    (34) ASIGN_LDERECHO -> DECIMAL .
+
+    PUNTO           reduce using rule 34 (ASIGN_LDERECHO -> DECIMAL .)
+
+
+state 60
+
+    (35) ASIGN_LDERECHO -> LOGICO .
+
+    PUNTO           reduce using rule 35 (ASIGN_LDERECHO -> LOGICO .)
+
+
+state 61
+
+    (11) SETUP -> DEF_PIN PICO_OPEN TIPO_PIN . DPUNTOS TD_ENTERO PICO_CLOSE
+    (12) SETUP -> DEF_PIN PICO_OPEN TIPO_PIN . DPUNTOS NOMBRE_VAR PICO_CLOSE
+
+    DPUNTOS         shift and go to state 80
+
+
+state 62
+
+    (13) TIPO_PIN -> TP_OUT .
+
+    DPUNTOS         reduce using rule 13 (TIPO_PIN -> TP_OUT .)
+
+
+state 63
+
+    (14) TIPO_PIN -> TP_INP .
+
+    DPUNTOS         reduce using rule 14 (TIPO_PIN -> TP_INP .)
+
+
+state 64
+
+    (16) LOOP -> FWD PICO_OPEN PICO_CLOSE .
+
+    PUNTO           reduce using rule 16 (LOOP -> FWD PICO_OPEN PICO_CLOSE .)
+
+
+state 65
+
+    (17) LOOP -> RIGHT PICO_OPEN PICO_CLOSE .
+
+    PUNTO           reduce using rule 17 (LOOP -> RIGHT PICO_OPEN PICO_CLOSE .)
+
+
+state 66
+
+    (18) LOOP -> LEFT PICO_OPEN PICO_CLOSE .
+
+    PUNTO           reduce using rule 18 (LOOP -> LEFT PICO_OPEN PICO_CLOSE .)
+
+
+state 67
+
+    (19) LOOP -> WAIT PICO_OPEN VALOR_TIEMPO . PICO_CLOSE
+
+    PICO_CLOSE      shift and go to state 81
+
+
+state 68
+
+    (21) VALOR_TIEMPO -> NOMBRE_VAR .
+
+    PICO_CLOSE      reduce using rule 21 (VALOR_TIEMPO -> NOMBRE_VAR .)
+
+
+state 69
+
+    (22) VALOR_TIEMPO -> VALOR_ENTERO .
+
+    PICO_CLOSE      reduce using rule 22 (VALOR_TIEMPO -> VALOR_ENTERO .)
+
+
+state 70
+
+    (23) VALOR_TIEMPO -> DECIMAL .
+
+    PICO_CLOSE      reduce using rule 23 (VALOR_TIEMPO -> DECIMAL .)
+
+
+state 71
+
+    (20) LOOP -> STOP PICO_OPEN PICO_CLOSE .
+
+    PUNTO           reduce using rule 20 (LOOP -> STOP PICO_OPEN PICO_CLOSE .)
+
+
+state 72
+
+    (36) FUNCIONES -> DEF_FUN NOMBRE_VAR PICO_OPEN . ARGUMENTOS PICO_CLOSE DPUNTOS CUERPO RETORNO
+    (37) ARGUMENTOS -> . TIPO DPUNTOS NOMBRE_VAR COMA ARGUMENTOS
+    (38) ARGUMENTOS -> . TIPO DPUNTOS NOMBRE_VAR
+    (26) TIPO -> . TD_ENTERO
+    (27) TIPO -> . TD_TEXTO
+    (28) TIPO -> . TD_DECIMAL
+    (29) TIPO -> . TD_LOGICO
+
+    TD_ENTERO       shift and go to state 51
+    TD_TEXTO        shift and go to state 52
+    TD_DECIMAL      shift and go to state 53
+    TD_LOGICO       shift and go to state 54
+
+    ARGUMENTOS                     shift and go to state 82
+    TIPO                           shift and go to state 83
+
+state 73
+
+    (39) CONDICIONALES -> IF CONDICION BEGIN . CUERPO END ELSE BEGIN CUERPO END
+    (40) CONDICIONALES -> IF CONDICION BEGIN . CUERPO END
+    (2) CUERPO -> . SENTENCIA CUERPO
+    (3) CUERPO -> . empty
+    (4) SENTENCIA -> . DEF_VBLES PUNTO
+    (5) SENTENCIA -> . ASIGNACIONES PUNTO
+    (6) SENTENCIA -> . SETUP PUNTO
+    (7) SENTENCIA -> . LOOP PUNTO
+    (8) SENTENCIA -> . FUNCIONES PUNTO
+    (9) SENTENCIA -> . CONDICIONALES
+    (10) SENTENCIA -> . CICLO
+    (46) empty -> .
+    (24) DEF_VBLES -> . DEF_VAR PICO_OPEN VARIABLE PICO_CLOSE
+    (30) ASIGNACIONES -> . NOMBRE_VAR ASIGNAR ASIGN_LDERECHO
+    (11) SETUP -> . DEF_PIN PICO_OPEN TIPO_PIN DPUNTOS TD_ENTERO PICO_CLOSE
+    (12) SETUP -> . DEF_PIN PICO_OPEN TIPO_PIN DPUNTOS NOMBRE_VAR PICO_CLOSE
+    (15) LOOP -> . BWD
+    (16) LOOP -> . FWD PICO_OPEN PICO_CLOSE
+    (17) LOOP -> . RIGHT PICO_OPEN PICO_CLOSE
+    (18) LOOP -> . LEFT PICO_OPEN PICO_CLOSE
+    (19) LOOP -> . WAIT PICO_OPEN VALOR_TIEMPO PICO_CLOSE
+    (20) LOOP -> . STOP PICO_OPEN PICO_CLOSE
+    (36) FUNCIONES -> . DEF_FUN NOMBRE_VAR PICO_OPEN ARGUMENTOS PICO_CLOSE DPUNTOS CUERPO RETORNO
+    (39) CONDICIONALES -> . IF CONDICION BEGIN CUERPO END ELSE BEGIN CUERPO END
+    (40) CONDICIONALES -> . IF CONDICION BEGIN CUERPO END
+    (41) CICLO -> . WHILE CONDICION BEGIN CUERPO END
+
+    END             reduce using rule 46 (empty -> .)
+    DEF_VAR         shift and go to state 15
+    NOMBRE_VAR      shift and go to state 16
+    DEF_PIN         shift and go to state 17
+    BWD             shift and go to state 18
+    FWD             shift and go to state 19
+    RIGHT           shift and go to state 20
+    LEFT            shift and go to state 21
+    WAIT            shift and go to state 22
+    STOP            shift and go to state 23
+    DEF_FUN         shift and go to state 24
+    IF              shift and go to state 25
+    WHILE           shift and go to state 26
+
+    CUERPO                         shift and go to state 84
+    SENTENCIA                      shift and go to state 6
+    empty                          shift and go to state 7
+    DEF_VBLES                      shift and go to state 8
+    ASIGNACIONES                   shift and go to state 9
+    SETUP                          shift and go to state 10
+    LOOP                           shift and go to state 11
+    FUNCIONES                      shift and go to state 12
+    CONDICIONALES                  shift and go to state 13
+    CICLO                          shift and go to state 14
+
+state 74
+
+    (42) CONDICION -> PICO_OPEN NOMBRE_VAR . OPERADOR NOMBRE_VAR PICO_CLOSE
+
+    OPERADOR        shift and go to state 85
+
+
+state 75
+
+    (41) CICLO -> WHILE CONDICION BEGIN . CUERPO END
+    (2) CUERPO -> . SENTENCIA CUERPO
+    (3) CUERPO -> . empty
+    (4) SENTENCIA -> . DEF_VBLES PUNTO
+    (5) SENTENCIA -> . ASIGNACIONES PUNTO
+    (6) SENTENCIA -> . SETUP PUNTO
+    (7) SENTENCIA -> . LOOP PUNTO
+    (8) SENTENCIA -> . FUNCIONES PUNTO
+    (9) SENTENCIA -> . CONDICIONALES
+    (10) SENTENCIA -> . CICLO
+    (46) empty -> .
+    (24) DEF_VBLES -> . DEF_VAR PICO_OPEN VARIABLE PICO_CLOSE
+    (30) ASIGNACIONES -> . NOMBRE_VAR ASIGNAR ASIGN_LDERECHO
+    (11) SETUP -> . DEF_PIN PICO_OPEN TIPO_PIN DPUNTOS TD_ENTERO PICO_CLOSE
+    (12) SETUP -> . DEF_PIN PICO_OPEN TIPO_PIN DPUNTOS NOMBRE_VAR PICO_CLOSE
+    (15) LOOP -> . BWD
+    (16) LOOP -> . FWD PICO_OPEN PICO_CLOSE
+    (17) LOOP -> . RIGHT PICO_OPEN PICO_CLOSE
+    (18) LOOP -> . LEFT PICO_OPEN PICO_CLOSE
+    (19) LOOP -> . WAIT PICO_OPEN VALOR_TIEMPO PICO_CLOSE
+    (20) LOOP -> . STOP PICO_OPEN PICO_CLOSE
+    (36) FUNCIONES -> . DEF_FUN NOMBRE_VAR PICO_OPEN ARGUMENTOS PICO_CLOSE DPUNTOS CUERPO RETORNO
+    (39) CONDICIONALES -> . IF CONDICION BEGIN CUERPO END ELSE BEGIN CUERPO END
+    (40) CONDICIONALES -> . IF CONDICION BEGIN CUERPO END
+    (41) CICLO -> . WHILE CONDICION BEGIN CUERPO END
+
+    END             reduce using rule 46 (empty -> .)
+    DEF_VAR         shift and go to state 15
+    NOMBRE_VAR      shift and go to state 16
+    DEF_PIN         shift and go to state 17
+    BWD             shift and go to state 18
+    FWD             shift and go to state 19
+    RIGHT           shift and go to state 20
+    LEFT            shift and go to state 21
+    WAIT            shift and go to state 22
+    STOP            shift and go to state 23
+    DEF_FUN         shift and go to state 24
+    IF              shift and go to state 25
+    WHILE           shift and go to state 26
+
+    CUERPO                         shift and go to state 86
+    SENTENCIA                      shift and go to state 6
+    empty                          shift and go to state 7
+    DEF_VBLES                      shift and go to state 8
+    ASIGNACIONES                   shift and go to state 9
+    SETUP                          shift and go to state 10
+    LOOP                           shift and go to state 11
+    FUNCIONES                      shift and go to state 12
+    CONDICIONALES                  shift and go to state 13
+    CICLO                          shift and go to state 14
+
+state 76
+
+    (43) LIBS -> ADD_LIB_EXT PICO_OPEN LIBRERIA PICO_CLOSE . PUNTO
+
+    PUNTO           shift and go to state 87
+
+
+state 77
+
+    (44) LIBRERIA -> NOMBRE_VAR EXTENSION .
+    (45) LIBRERIA -> NOMBRE_VAR EXTENSION . COMA LIBRERIA
+
+    PICO_CLOSE      reduce using rule 44 (LIBRERIA -> NOMBRE_VAR EXTENSION .)
+    COMA            shift and go to state 88
+
+
+state 78
+
+    (24) DEF_VBLES -> DEF_VAR PICO_OPEN VARIABLE PICO_CLOSE .
+
+    PUNTO           reduce using rule 24 (DEF_VBLES -> DEF_VAR PICO_OPEN VARIABLE PICO_CLOSE .)
+
+
+state 79
+
+    (25) VARIABLE -> TIPO DPUNTOS . NOMBRE_VAR
+
+    NOMBRE_VAR      shift and go to state 89
+
+
+state 80
+
+    (11) SETUP -> DEF_PIN PICO_OPEN TIPO_PIN DPUNTOS . TD_ENTERO PICO_CLOSE
+    (12) SETUP -> DEF_PIN PICO_OPEN TIPO_PIN DPUNTOS . NOMBRE_VAR PICO_CLOSE
+
+    TD_ENTERO       shift and go to state 90
+    NOMBRE_VAR      shift and go to state 91
+
+
+state 81
+
+    (19) LOOP -> WAIT PICO_OPEN VALOR_TIEMPO PICO_CLOSE .
+
+    PUNTO           reduce using rule 19 (LOOP -> WAIT PICO_OPEN VALOR_TIEMPO PICO_CLOSE .)
+
+
+state 82
+
+    (36) FUNCIONES -> DEF_FUN NOMBRE_VAR PICO_OPEN ARGUMENTOS . PICO_CLOSE DPUNTOS CUERPO RETORNO
+
+    PICO_CLOSE      shift and go to state 92
+
+
+state 83
+
+    (37) ARGUMENTOS -> TIPO . DPUNTOS NOMBRE_VAR COMA ARGUMENTOS
+    (38) ARGUMENTOS -> TIPO . DPUNTOS NOMBRE_VAR
+
+    DPUNTOS         shift and go to state 93
+
+
+state 84
+
+    (39) CONDICIONALES -> IF CONDICION BEGIN CUERPO . END ELSE BEGIN CUERPO END
+    (40) CONDICIONALES -> IF CONDICION BEGIN CUERPO . END
+
+    END             shift and go to state 94
+
+
+state 85
+
+    (42) CONDICION -> PICO_OPEN NOMBRE_VAR OPERADOR . NOMBRE_VAR PICO_CLOSE
+
+    NOMBRE_VAR      shift and go to state 95
+
+
+state 86
+
+    (41) CICLO -> WHILE CONDICION BEGIN CUERPO . END
+
+    END             shift and go to state 96
+
+
+state 87
+
+    (43) LIBS -> ADD_LIB_EXT PICO_OPEN LIBRERIA PICO_CLOSE PUNTO .
+
+    DEF_VAR         reduce using rule 43 (LIBS -> ADD_LIB_EXT PICO_OPEN LIBRERIA PICO_CLOSE PUNTO .)
+    NOMBRE_VAR      reduce using rule 43 (LIBS -> ADD_LIB_EXT PICO_OPEN LIBRERIA PICO_CLOSE PUNTO .)
+    DEF_PIN         reduce using rule 43 (LIBS -> ADD_LIB_EXT PICO_OPEN LIBRERIA PICO_CLOSE PUNTO .)
+    BWD             reduce using rule 43 (LIBS -> ADD_LIB_EXT PICO_OPEN LIBRERIA PICO_CLOSE PUNTO .)
+    FWD             reduce using rule 43 (LIBS -> ADD_LIB_EXT PICO_OPEN LIBRERIA PICO_CLOSE PUNTO .)
+    RIGHT           reduce using rule 43 (LIBS -> ADD_LIB_EXT PICO_OPEN LIBRERIA PICO_CLOSE PUNTO .)
+    LEFT            reduce using rule 43 (LIBS -> ADD_LIB_EXT PICO_OPEN LIBRERIA PICO_CLOSE PUNTO .)
+    WAIT            reduce using rule 43 (LIBS -> ADD_LIB_EXT PICO_OPEN LIBRERIA PICO_CLOSE PUNTO .)
+    STOP            reduce using rule 43 (LIBS -> ADD_LIB_EXT PICO_OPEN LIBRERIA PICO_CLOSE PUNTO .)
+    DEF_FUN         reduce using rule 43 (LIBS -> ADD_LIB_EXT PICO_OPEN LIBRERIA PICO_CLOSE PUNTO .)
+    IF              reduce using rule 43 (LIBS -> ADD_LIB_EXT PICO_OPEN LIBRERIA PICO_CLOSE PUNTO .)
+    WHILE           reduce using rule 43 (LIBS -> ADD_LIB_EXT PICO_OPEN LIBRERIA PICO_CLOSE PUNTO .)
+    PROG_END        reduce using rule 43 (LIBS -> ADD_LIB_EXT PICO_OPEN LIBRERIA PICO_CLOSE PUNTO .)
+
+
+state 88
+
+    (45) LIBRERIA -> NOMBRE_VAR EXTENSION COMA . LIBRERIA
+    (44) LIBRERIA -> . NOMBRE_VAR EXTENSION
+    (45) LIBRERIA -> . NOMBRE_VAR EXTENSION COMA LIBRERIA
+
+    NOMBRE_VAR      shift and go to state 48
+
+    LIBRERIA                       shift and go to state 97
+
+state 89
+
+    (25) VARIABLE -> TIPO DPUNTOS NOMBRE_VAR .
+
+    PICO_CLOSE      reduce using rule 25 (VARIABLE -> TIPO DPUNTOS NOMBRE_VAR .)
+
+
+state 90
+
+    (11) SETUP -> DEF_PIN PICO_OPEN TIPO_PIN DPUNTOS TD_ENTERO . PICO_CLOSE
+
+    PICO_CLOSE      shift and go to state 98
+
+
+state 91
+
+    (12) SETUP -> DEF_PIN PICO_OPEN TIPO_PIN DPUNTOS NOMBRE_VAR . PICO_CLOSE
+
+    PICO_CLOSE      shift and go to state 99
+
+
+state 92
+
+    (36) FUNCIONES -> DEF_FUN NOMBRE_VAR PICO_OPEN ARGUMENTOS PICO_CLOSE . DPUNTOS CUERPO RETORNO
+
+    DPUNTOS         shift and go to state 100
+
+
+state 93
+
+    (37) ARGUMENTOS -> TIPO DPUNTOS . NOMBRE_VAR COMA ARGUMENTOS
+    (38) ARGUMENTOS -> TIPO DPUNTOS . NOMBRE_VAR
+
+    NOMBRE_VAR      shift and go to state 101
+
+
+state 94
+
+    (39) CONDICIONALES -> IF CONDICION BEGIN CUERPO END . ELSE BEGIN CUERPO END
+    (40) CONDICIONALES -> IF CONDICION BEGIN CUERPO END .
+
+    ELSE            shift and go to state 102
+    DEF_VAR         reduce using rule 40 (CONDICIONALES -> IF CONDICION BEGIN CUERPO END .)
+    NOMBRE_VAR      reduce using rule 40 (CONDICIONALES -> IF CONDICION BEGIN CUERPO END .)
+    DEF_PIN         reduce using rule 40 (CONDICIONALES -> IF CONDICION BEGIN CUERPO END .)
+    BWD             reduce using rule 40 (CONDICIONALES -> IF CONDICION BEGIN CUERPO END .)
+    FWD             reduce using rule 40 (CONDICIONALES -> IF CONDICION BEGIN CUERPO END .)
+    RIGHT           reduce using rule 40 (CONDICIONALES -> IF CONDICION BEGIN CUERPO END .)
+    LEFT            reduce using rule 40 (CONDICIONALES -> IF CONDICION BEGIN CUERPO END .)
+    WAIT            reduce using rule 40 (CONDICIONALES -> IF CONDICION BEGIN CUERPO END .)
+    STOP            reduce using rule 40 (CONDICIONALES -> IF CONDICION BEGIN CUERPO END .)
+    DEF_FUN         reduce using rule 40 (CONDICIONALES -> IF CONDICION BEGIN CUERPO END .)
+    IF              reduce using rule 40 (CONDICIONALES -> IF CONDICION BEGIN CUERPO END .)
+    WHILE           reduce using rule 40 (CONDICIONALES -> IF CONDICION BEGIN CUERPO END .)
+    PROG_END        reduce using rule 40 (CONDICIONALES -> IF CONDICION BEGIN CUERPO END .)
+    END             reduce using rule 40 (CONDICIONALES -> IF CONDICION BEGIN CUERPO END .)
+    RETORNO         reduce using rule 40 (CONDICIONALES -> IF CONDICION BEGIN CUERPO END .)
+
+
+state 95
+
+    (42) CONDICION -> PICO_OPEN NOMBRE_VAR OPERADOR NOMBRE_VAR . PICO_CLOSE
+
+    PICO_CLOSE      shift and go to state 103
+
+
+state 96
+
+    (41) CICLO -> WHILE CONDICION BEGIN CUERPO END .
+
+    DEF_VAR         reduce using rule 41 (CICLO -> WHILE CONDICION BEGIN CUERPO END .)
+    NOMBRE_VAR      reduce using rule 41 (CICLO -> WHILE CONDICION BEGIN CUERPO END .)
+    DEF_PIN         reduce using rule 41 (CICLO -> WHILE CONDICION BEGIN CUERPO END .)
+    BWD             reduce using rule 41 (CICLO -> WHILE CONDICION BEGIN CUERPO END .)
+    FWD             reduce using rule 41 (CICLO -> WHILE CONDICION BEGIN CUERPO END .)
+    RIGHT           reduce using rule 41 (CICLO -> WHILE CONDICION BEGIN CUERPO END .)
+    LEFT            reduce using rule 41 (CICLO -> WHILE CONDICION BEGIN CUERPO END .)
+    WAIT            reduce using rule 41 (CICLO -> WHILE CONDICION BEGIN CUERPO END .)
+    STOP            reduce using rule 41 (CICLO -> WHILE CONDICION BEGIN CUERPO END .)
+    DEF_FUN         reduce using rule 41 (CICLO -> WHILE CONDICION BEGIN CUERPO END .)
+    IF              reduce using rule 41 (CICLO -> WHILE CONDICION BEGIN CUERPO END .)
+    WHILE           reduce using rule 41 (CICLO -> WHILE CONDICION BEGIN CUERPO END .)
+    PROG_END        reduce using rule 41 (CICLO -> WHILE CONDICION BEGIN CUERPO END .)
+    END             reduce using rule 41 (CICLO -> WHILE CONDICION BEGIN CUERPO END .)
+    RETORNO         reduce using rule 41 (CICLO -> WHILE CONDICION BEGIN CUERPO END .)
+
+
+state 97
+
+    (45) LIBRERIA -> NOMBRE_VAR EXTENSION COMA LIBRERIA .
+
+    PICO_CLOSE      reduce using rule 45 (LIBRERIA -> NOMBRE_VAR EXTENSION COMA LIBRERIA .)
+
+
+state 98
+
+    (11) SETUP -> DEF_PIN PICO_OPEN TIPO_PIN DPUNTOS TD_ENTERO PICO_CLOSE .
+
+    PUNTO           reduce using rule 11 (SETUP -> DEF_PIN PICO_OPEN TIPO_PIN DPUNTOS TD_ENTERO PICO_CLOSE .)
+
+
+state 99
+
+    (12) SETUP -> DEF_PIN PICO_OPEN TIPO_PIN DPUNTOS NOMBRE_VAR PICO_CLOSE .
+
+    PUNTO           reduce using rule 12 (SETUP -> DEF_PIN PICO_OPEN TIPO_PIN DPUNTOS NOMBRE_VAR PICO_CLOSE .)
+
+
+state 100
+
+    (36) FUNCIONES -> DEF_FUN NOMBRE_VAR PICO_OPEN ARGUMENTOS PICO_CLOSE DPUNTOS . CUERPO RETORNO
+    (2) CUERPO -> . SENTENCIA CUERPO
+    (3) CUERPO -> . empty
+    (4) SENTENCIA -> . DEF_VBLES PUNTO
+    (5) SENTENCIA -> . ASIGNACIONES PUNTO
+    (6) SENTENCIA -> . SETUP PUNTO
+    (7) SENTENCIA -> . LOOP PUNTO
+    (8) SENTENCIA -> . FUNCIONES PUNTO
+    (9) SENTENCIA -> . CONDICIONALES
+    (10) SENTENCIA -> . CICLO
+    (46) empty -> .
+    (24) DEF_VBLES -> . DEF_VAR PICO_OPEN VARIABLE PICO_CLOSE
+    (30) ASIGNACIONES -> . NOMBRE_VAR ASIGNAR ASIGN_LDERECHO
+    (11) SETUP -> . DEF_PIN PICO_OPEN TIPO_PIN DPUNTOS TD_ENTERO PICO_CLOSE
+    (12) SETUP -> . DEF_PIN PICO_OPEN TIPO_PIN DPUNTOS NOMBRE_VAR PICO_CLOSE
+    (15) LOOP -> . BWD
+    (16) LOOP -> . FWD PICO_OPEN PICO_CLOSE
+    (17) LOOP -> . RIGHT PICO_OPEN PICO_CLOSE
+    (18) LOOP -> . LEFT PICO_OPEN PICO_CLOSE
+    (19) LOOP -> . WAIT PICO_OPEN VALOR_TIEMPO PICO_CLOSE
+    (20) LOOP -> . STOP PICO_OPEN PICO_CLOSE
+    (36) FUNCIONES -> . DEF_FUN NOMBRE_VAR PICO_OPEN ARGUMENTOS PICO_CLOSE DPUNTOS CUERPO RETORNO
+    (39) CONDICIONALES -> . IF CONDICION BEGIN CUERPO END ELSE BEGIN CUERPO END
+    (40) CONDICIONALES -> . IF CONDICION BEGIN CUERPO END
+    (41) CICLO -> . WHILE CONDICION BEGIN CUERPO END
+
+    RETORNO         reduce using rule 46 (empty -> .)
+    DEF_VAR         shift and go to state 15
+    NOMBRE_VAR      shift and go to state 16
+    DEF_PIN         shift and go to state 17
+    BWD             shift and go to state 18
+    FWD             shift and go to state 19
+    RIGHT           shift and go to state 20
+    LEFT            shift and go to state 21
+    WAIT            shift and go to state 22
+    STOP            shift and go to state 23
+    DEF_FUN         shift and go to state 24
+    IF              shift and go to state 25
+    WHILE           shift and go to state 26
+
+    CUERPO                         shift and go to state 104
+    SENTENCIA                      shift and go to state 6
+    empty                          shift and go to state 7
+    DEF_VBLES                      shift and go to state 8
+    ASIGNACIONES                   shift and go to state 9
+    SETUP                          shift and go to state 10
+    LOOP                           shift and go to state 11
+    FUNCIONES                      shift and go to state 12
+    CONDICIONALES                  shift and go to state 13
+    CICLO                          shift and go to state 14
+
+state 101
+
+    (37) ARGUMENTOS -> TIPO DPUNTOS NOMBRE_VAR . COMA ARGUMENTOS
+    (38) ARGUMENTOS -> TIPO DPUNTOS NOMBRE_VAR .
+
+    COMA            shift and go to state 105
+    PICO_CLOSE      reduce using rule 38 (ARGUMENTOS -> TIPO DPUNTOS NOMBRE_VAR .)
+
+
+state 102
+
+    (39) CONDICIONALES -> IF CONDICION BEGIN CUERPO END ELSE . BEGIN CUERPO END
+
+    BEGIN           shift and go to state 106
+
+
+state 103
+
+    (42) CONDICION -> PICO_OPEN NOMBRE_VAR OPERADOR NOMBRE_VAR PICO_CLOSE .
+
+    BEGIN           reduce using rule 42 (CONDICION -> PICO_OPEN NOMBRE_VAR OPERADOR NOMBRE_VAR PICO_CLOSE .)
+
+
+state 104
+
+    (36) FUNCIONES -> DEF_FUN NOMBRE_VAR PICO_OPEN ARGUMENTOS PICO_CLOSE DPUNTOS CUERPO . RETORNO
+
+    RETORNO         shift and go to state 107
+
+
+state 105
+
+    (37) ARGUMENTOS -> TIPO DPUNTOS NOMBRE_VAR COMA . ARGUMENTOS
+    (37) ARGUMENTOS -> . TIPO DPUNTOS NOMBRE_VAR COMA ARGUMENTOS
+    (38) ARGUMENTOS -> . TIPO DPUNTOS NOMBRE_VAR
+    (26) TIPO -> . TD_ENTERO
+    (27) TIPO -> . TD_TEXTO
+    (28) TIPO -> . TD_DECIMAL
+    (29) TIPO -> . TD_LOGICO
+
+    TD_ENTERO       shift and go to state 51
+    TD_TEXTO        shift and go to state 52
+    TD_DECIMAL      shift and go to state 53
+    TD_LOGICO       shift and go to state 54
+
+    TIPO                           shift and go to state 83
+    ARGUMENTOS                     shift and go to state 108
+
+state 106
+
+    (39) CONDICIONALES -> IF CONDICION BEGIN CUERPO END ELSE BEGIN . CUERPO END
+    (2) CUERPO -> . SENTENCIA CUERPO
+    (3) CUERPO -> . empty
+    (4) SENTENCIA -> . DEF_VBLES PUNTO
+    (5) SENTENCIA -> . ASIGNACIONES PUNTO
+    (6) SENTENCIA -> . SETUP PUNTO
+    (7) SENTENCIA -> . LOOP PUNTO
+    (8) SENTENCIA -> . FUNCIONES PUNTO
+    (9) SENTENCIA -> . CONDICIONALES
+    (10) SENTENCIA -> . CICLO
+    (46) empty -> .
+    (24) DEF_VBLES -> . DEF_VAR PICO_OPEN VARIABLE PICO_CLOSE
+    (30) ASIGNACIONES -> . NOMBRE_VAR ASIGNAR ASIGN_LDERECHO
+    (11) SETUP -> . DEF_PIN PICO_OPEN TIPO_PIN DPUNTOS TD_ENTERO PICO_CLOSE
+    (12) SETUP -> . DEF_PIN PICO_OPEN TIPO_PIN DPUNTOS NOMBRE_VAR PICO_CLOSE
+    (15) LOOP -> . BWD
+    (16) LOOP -> . FWD PICO_OPEN PICO_CLOSE
+    (17) LOOP -> . RIGHT PICO_OPEN PICO_CLOSE
+    (18) LOOP -> . LEFT PICO_OPEN PICO_CLOSE
+    (19) LOOP -> . WAIT PICO_OPEN VALOR_TIEMPO PICO_CLOSE
+    (20) LOOP -> . STOP PICO_OPEN PICO_CLOSE
+    (36) FUNCIONES -> . DEF_FUN NOMBRE_VAR PICO_OPEN ARGUMENTOS PICO_CLOSE DPUNTOS CUERPO RETORNO
+    (39) CONDICIONALES -> . IF CONDICION BEGIN CUERPO END ELSE BEGIN CUERPO END
+    (40) CONDICIONALES -> . IF CONDICION BEGIN CUERPO END
+    (41) CICLO -> . WHILE CONDICION BEGIN CUERPO END
+
+    END             reduce using rule 46 (empty -> .)
+    DEF_VAR         shift and go to state 15
+    NOMBRE_VAR      shift and go to state 16
+    DEF_PIN         shift and go to state 17
+    BWD             shift and go to state 18
+    FWD             shift and go to state 19
+    RIGHT           shift and go to state 20
+    LEFT            shift and go to state 21
+    WAIT            shift and go to state 22
+    STOP            shift and go to state 23
+    DEF_FUN         shift and go to state 24
+    IF              shift and go to state 25
+    WHILE           shift and go to state 26
+
+    CUERPO                         shift and go to state 109
+    SENTENCIA                      shift and go to state 6
+    empty                          shift and go to state 7
+    DEF_VBLES                      shift and go to state 8
+    ASIGNACIONES                   shift and go to state 9
+    SETUP                          shift and go to state 10
+    LOOP                           shift and go to state 11
+    FUNCIONES                      shift and go to state 12
+    CONDICIONALES                  shift and go to state 13
+    CICLO                          shift and go to state 14
+
+state 107
+
+    (36) FUNCIONES -> DEF_FUN NOMBRE_VAR PICO_OPEN ARGUMENTOS PICO_CLOSE DPUNTOS CUERPO RETORNO .
+
+    PUNTO           reduce using rule 36 (FUNCIONES -> DEF_FUN NOMBRE_VAR PICO_OPEN ARGUMENTOS PICO_CLOSE DPUNTOS CUERPO RETORNO .)
+
+
+state 108
+
+    (37) ARGUMENTOS -> TIPO DPUNTOS NOMBRE_VAR COMA ARGUMENTOS .
+
+    PICO_CLOSE      reduce using rule 37 (ARGUMENTOS -> TIPO DPUNTOS NOMBRE_VAR COMA ARGUMENTOS .)
+
+
+state 109
+
+    (39) CONDICIONALES -> IF CONDICION BEGIN CUERPO END ELSE BEGIN CUERPO . END
+
+    END             shift and go to state 110
+
+
+state 110
+
+    (39) CONDICIONALES -> IF CONDICION BEGIN CUERPO END ELSE BEGIN CUERPO END .
+
+    DEF_VAR         reduce using rule 39 (CONDICIONALES -> IF CONDICION BEGIN CUERPO END ELSE BEGIN CUERPO END .)
+    NOMBRE_VAR      reduce using rule 39 (CONDICIONALES -> IF CONDICION BEGIN CUERPO END ELSE BEGIN CUERPO END .)
+    DEF_PIN         reduce using rule 39 (CONDICIONALES -> IF CONDICION BEGIN CUERPO END ELSE BEGIN CUERPO END .)
+    BWD             reduce using rule 39 (CONDICIONALES -> IF CONDICION BEGIN CUERPO END ELSE BEGIN CUERPO END .)
+    FWD             reduce using rule 39 (CONDICIONALES -> IF CONDICION BEGIN CUERPO END ELSE BEGIN CUERPO END .)
+    RIGHT           reduce using rule 39 (CONDICIONALES -> IF CONDICION BEGIN CUERPO END ELSE BEGIN CUERPO END .)
+    LEFT            reduce using rule 39 (CONDICIONALES -> IF CONDICION BEGIN CUERPO END ELSE BEGIN CUERPO END .)
+    WAIT            reduce using rule 39 (CONDICIONALES -> IF CONDICION BEGIN CUERPO END ELSE BEGIN CUERPO END .)
+    STOP            reduce using rule 39 (CONDICIONALES -> IF CONDICION BEGIN CUERPO END ELSE BEGIN CUERPO END .)
+    DEF_FUN         reduce using rule 39 (CONDICIONALES -> IF CONDICION BEGIN CUERPO END ELSE BEGIN CUERPO END .)
+    IF              reduce using rule 39 (CONDICIONALES -> IF CONDICION BEGIN CUERPO END ELSE BEGIN CUERPO END .)
+    WHILE           reduce using rule 39 (CONDICIONALES -> IF CONDICION BEGIN CUERPO END ELSE BEGIN CUERPO END .)
+    PROG_END        reduce using rule 39 (CONDICIONALES -> IF CONDICION BEGIN CUERPO END ELSE BEGIN CUERPO END .)
+    END             reduce using rule 39 (CONDICIONALES -> IF CONDICION BEGIN CUERPO END ELSE BEGIN CUERPO END .)
+    RETORNO         reduce using rule 39 (CONDICIONALES -> IF CONDICION BEGIN CUERPO END ELSE BEGIN CUERPO END .)
+

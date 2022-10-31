@@ -35,4 +35,3 @@ FOWARD<>.
 LEFT<>.
 STOP<>.
 PROG_END
-

@@ -1,8 +1,18 @@
 PROG_BEGIN
-ADD<nomreDeLibreria.extension>.
+ADD<ASDA2.ext>.
 VAR <entero:MD1>.
 VAR <entero:MD2>.
 MD2:=3.
+FUNC nombre<entero: asd , texto: asd>:
+    IF <MD1 == MD2> BEGIN
+        WHILE <MD1 != MD2> BEGIN
+            VAR <entero:MD2>.
+        END
+    END
+    ELSE BEGIN
+        MD2:=3.
+    END
+retorno.
 //INICIO DE LA SECCION SETUP
 PIN<OUT:MD1>.
 PIN<OUT:MD2>.
@@ -10,4 +20,6 @@ PIN<OUT:MD2>.
 FOWARD<>.
 LEFT<>.
 STOP<>.
+WAIT<2000>.
+WAIT<2.0>.
 PROG_END
